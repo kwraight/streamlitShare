@@ -29,8 +29,9 @@ def dateFormat(dt):
 nowTime = datetime.datetime.now()
 st.write("""## Welcome to Sandy's Quiz on """+dateFormat(nowTime))
 
-for q in quizList:
-    ans=selectbox_with_default(q['q'], q['opts'])
+for e,q in enumerate(quizList):
+    st.write("### Q."+str(e+1)+" "+q['q'])
+    ans=selectbox_with_default("", q['opts'])
     #st.write("debug:",ans)
     if ans==q['opts'][q['a']]:
         st.balloons()
