@@ -8,7 +8,7 @@ import datetime
 ################
 quizList=[]
 quizList.append({'q':"Which of these is not a fish?", 'opts':["trout","haddock","cod","ambidextrous"], 'a':3})
-#quizList.append({'q':"Who let the dogs out?", 'opts':["you","me","other"], 'a':2})
+quizList.append({'q':"Who let the dogs out?", 'opts':["you","me","Heathcliff"], 'a':2})
 
 ################
 ### Useful functions
@@ -23,18 +23,36 @@ def selectbox_with_default(text, values, default=DEFAULT, sidebar=False):
 def dateFormat(dt):
     return str("{0:02}-{1:02}-{2:04}".format(dt.day,dt.month,dt.year))+" at "+str("{0:02}:{1:02}".format(dt.hour,dt.minute))
 
-################
-### Open app.
-################
-nowTime = datetime.datetime.now()
-st.write("""## Welcome to Sandy's Quiz on """+dateFormat(nowTime))
-
-for e,q in enumerate(quizList):
-    st.write("### Q."+str(e+1)+" "+q['q'])
+def GetResult(q,num):
+    st.write("### Q."+str(num)+" "+q['q'])
     ans=selectbox_with_default("", q['opts'])
     #st.write("debug:",ans)
     if ans==q['opts'][q['a']]:
-        st.balloons()
-        st.write("Correct!")
+        st.write("### Correct :smile:")
+        return True
     else:
-        st.write("Incorrect!")
+        st.write("### Incorrect. Try again")
+        return False
+
+
+################
+### Open app.
+################
+### intro
+nowTime = datetime.datetime.now()
+st.write("""## Welcome to Sandy's Quiz on """+dateFormat(nowTime))
+
+### questions
+count=0
+endOfQuiz=False
+while GetResult(quizList[count],count+1):
+    count+=1
+    if count>=len(quizList):
+        endOfQuiz=True
+        break
+#st.write("debug:",count)
+
+### sign off
+if endOfQuiz:
+    st.balloons()
+    st.write("## End of quiz")
