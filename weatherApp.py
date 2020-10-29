@@ -109,10 +109,10 @@ st.write("""## Weather forecast for **"""+where[0]+"""** ***("""+where[1]+""")**
 
 st.write("""## Hourly info. (48h)""")
 ## make hourly plot
-fig1=cf.TempHumPlot(dfHourly,3)
+fig1=TempHumPlot(dfHourly,3)
 st.pyplot(fig1)
 
 st.write("""## Daily info. (7days)""")
 ## make daily plot
-fig2=cf.TempHumPlot(dfDaily)
+fig2=TempHumPlot(dfDaily)
 st.pyplot(fig2)
