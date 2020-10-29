@@ -4,6 +4,15 @@ import streamlit as st
 import datetime
 import pandas as pd
 import numpy as np
+### streamlit stuff
+import streamlit as st
+### altair stuff
+import altair as alt
+### plotly stuff
+import plotly.express as px
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
+### matplotlib stuff
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 
@@ -11,7 +20,7 @@ import matplotlib.ticker as ticker
 ### Useful Functions
 ################
 ### Temperature and Humidity plotting
-def TempHumPlot(df, f=1):
+def MatplotlibPlot(df, f=1):
     ## first axis
     fig, ax1 = plt.subplots()
     color = "tab:red"
@@ -38,6 +47,60 @@ def TempHumPlot(df, f=1):
     ax1.legend(loc='lower left')
     ax2.legend(loc='lower right')
     fig.tight_layout()  # otherwise the right y-label is slightly clipped
+    return fig
+
+def AltairPlot(df):
+    # fig=alt.Chart(df).transform_fold(
+    # ['humid', 'tempC']
+    # ).mark_line().encode(
+    #     x='time:O',
+    #     y='value:Q',
+    #     color='key:N'
+    # )
+
+    fig1 = alt.Chart(df).mark_line(point=True, color='blue').encode(
+    x = alt.X('time:O', axis = alt.Axis(title = 'Date : Hour')),
+    y = alt.Y('humid:Q', scale=alt.Scale(zero=False), axis = alt.Axis(title = 'humid [%]')),
+    tooltip=['time', 'humid']
+    )
+
+    fig2 = alt.Chart(df).mark_line(point=True, color='red').encode(
+    x = alt.X('time:O', axis = alt.Axis(title = 'Date : Hour')),
+    y = alt.Y('tempC:Q', scale=alt.Scale(zero=False), axis = alt.Axis(title = 'Temp [ºC]')),
+    tooltip=['time', 'tempC']
+    )
+
+    fig = alt.layer(fig1, fig2
+    ).configure_axis(
+    grid=True
+    ).resolve_scale(
+    y='independent'
+    ).properties(
+    width=600,
+    height=400
+    )
+    return fig
+
+def PlotlyPlot(df):
+    # Create figure with secondary y-axis
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+    # Add traces
+    fig.add_trace(
+        go.Scatter(x=df['time'], y=df['humid'], name="humid [%]"),
+        secondary_y=False,
+    )
+    fig.add_trace(
+        go.Scatter(x=df['time'], y=df['tempC'], name="Temp [ºC]"),
+        secondary_y=True,
+    )
+    # Add figure title
+    #fig.update_layout( title_text="Double Y Axis Example" )
+    # Set x-axis title
+    fig.update_xaxes(title_text="Date : Hour")
+    # Set y-axes titles
+    fig.update_yaxes(title_text="humid [%]", secondary_y=False)
+    fig.update_yaxes(title_text="Temp [ºC]", secondary_y=True)
+    fig.update_layout(showlegend=False)
     return fig
 
 ################
@@ -108,12 +171,40 @@ dfDaily = pd.DataFrame(foreInfoDaily)
 st.write("""## Weather forecast for **"""+where[0]+"""** ***("""+where[1]+""")*** """+str("{0:02}:{1:02}".format(nowTime.hour,nowTime.minute))+""" """)
 #st.line_chart(df.tempC)
 
+st.sidebar.title(":sweat_smile: Choose plotter")
+plotter = st.sidebar.radio("", ["matplotlib","plotly","altair"])
+
 st.write("""## Hourly info. (48h)""")
 ## make hourly plot
-fig1=TempHumPlot(dfHourly,3)
-st.pyplot(fig1)
+if "matplotlib" in plotter:
+    fig1=MatplotlibPlot(dfHourly,3)
+elif "altair" in plotter:
+    #st.write("debug: altair plotting")
+    fig1=AltairPlot(dfHourly)
+elif "plotly" in plotter:
+    #st.write("debug: plotly plotting")
+    fig1=PlotlyPlot(dfHourly)
+else:
+    #st.write("debug: NO plotting")
+    fig1=None
+
+try:
+    st.write(fig1)
+except:
+    st.write("Problem with first plot")
 
 st.write("""## Daily info. (7days)""")
 ## make daily plot
-fig2=TempHumPlot(dfDaily)
-st.pyplot(fig2)
+if "matplotlib" in plotter:
+    fig2=MatplotlibPlot(dfDaily)
+elif "altair" in plotter:
+    fig2=AltairPlot(dfDaily)
+elif "plotly" in plotter:
+    fig2=PlotlyPlot(dfDaily)
+else:
+    fig1=None
+
+try:
+    st.write(fig2)
+except:
+    st.write("Problem with second plot")
