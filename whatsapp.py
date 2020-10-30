@@ -370,12 +370,52 @@ def page_allPersons(state):
         st.markdown("## 1. Emoji league table")
         st.dataframe(emoji_df)
 
+        st.markdown("## 2. Word Cloud")
         media_messages_df = dataDash[dataDash['Message'] == '<Media omitted>']
         dataDash = dataDash.drop(media_messages_df.index)
 
+        #st.write(dataDash.Message)
+        #st.write("size:",len(dataDash.Message))
         text = " ".join(review for review in dataDash.Message)
+
+        textSplit = text.split()
+        #st.write("length:",len(textSplit))
+        textFreq = {}
+        for txt in textSplit:
+            t=txt.replace('.','').replace(',','').replace(' ','')
+            if len(txt)<2:
+                continue
+            if t.isnumeric():
+                continue
+            if t in textFreq.keys():
+                continue
+            textFreq[t]=text.count(t)
+
         stopwords = set(wordcloud.STOPWORDS)
-        stopwords.update(["ra", "ga", "na", "ani", "em", "ki", "ah","ha","la","eh","ne","le","https","http","www","image","audio","omitted"])
+        stopwords.update(["wa","ra", "ga", "na", "ani", "em", "ki", "ah","ha","la","eh","ne","le","https","http","www","image","audio","omitted"])
+        df_textFreq=pd.DataFrame(textFreq.items(),columns=["text","freq"])
+        df_textFreq = df_textFreq[~df_textFreq['text'].isin(stopwords)]
+        #st.write(df_textFreq.nlargest(25, ['freq']) )
+        addWord = st.text_input(label='Add word to ignore', value='')
+        if st.button("Add to ignore words"):
+            try:
+                state.wordFilters.append(addWord)
+            except AttributeError:
+                state.wordFilters=[addWord]
+
+        if st.button("Clear query filters"):
+            state.wordFilters=[]
+
+        st.write("filters:")
+        st.write(state.wordFilters)
+
+        if st.button("Apply filters"):
+            try:
+                stopwords.update(state.wordFilters)
+            except:
+                st.write("No filters set yet")
+
+        #st.write(stopwords)
         # Generate a word cloud image
         wcImg = wordcloud.WordCloud(stopwords=stopwords, background_color="white").generate(text)
         # Display the generated image:
@@ -384,7 +424,6 @@ def page_allPersons(state):
         wcFig = plt.figure( figsize=(10,5))
         plt.imshow(wcImg, interpolation='bilinear')
         plt.axis("off")
-        st.markdown("## 2. Word Cloud")
         st.write(wcFig)
 
         ### Week Profile
