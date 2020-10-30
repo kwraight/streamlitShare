@@ -198,10 +198,11 @@ def page_selection(state):
     st.markdown("## Get WhatsApp statistics!")
     st.markdown(" 1. Export file from WhatsApp chat")
     st.markdown(" 2. Drop/Select file in box below")
-    st.markdown("  a. For *iPhones*, you'll need to unzip the file to get the *txt* inside")
+    st.markdown("  - For *iPhones*, you'll need to unzip the file to get the *txt* inside")
     st.markdown(" 3. View the result (select pages from LHS sidebar):")
     st.markdown("  a. Per person statisics in *Dashboard (PP)* ")
     st.markdown("  b. Total chat statisics in *Dashboard (All)* ")
+    st.markdown(" *NB* No data is retained ")
 
     ## drag and drop method
     state.file = st.file_uploader("Upload a file", type=["txt","zip"])
