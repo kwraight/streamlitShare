@@ -269,14 +269,25 @@ def page_perPerson(state):
         authors_df['MessageCount']=1
         authors_df= authors_df.groupby("Author").sum()
         authors_df.reset_index(inplace=True)
-        #st.dataframe(authors_df)
+        st.dataframe(authors_df)
 
         st.markdown('## 1. Contribution chart')
         authFig = px.pie(authors_df, values='MessageCount', names='Author')
         authFig.update_traces(textposition='inside', textinfo='percent+label')
         st.write(authFig)
-        talker=authors_df.sort_values('MessageCount', ascending=False).Author.iloc[0]
-        st.markdown("### "+talker+" is the chattiest")
+        chattiest=authors_df.iloc[authors_df['MessageCount'].argmax()]['Author']
+        Nchattiest=authors_df.iloc[authors_df['MessageCount'].argmax()]['MessageCount']
+        st.write("### "+chattiest+" is the chattiest:",Nchattiest,"messages")
+
+        verbosest="NYS"
+        verbosity=-1
+        st.write(np.sum(messages_df.query('Author=="Sandy"')['Word_Count']))
+        for a in messages_df["Author"].unique():
+            words_per_message = np.sum(messages_df.query('Author=="'+a+'"')['Word_Count'])/messages_df.query('Author=="'+a+'"').shape[0]
+            if words_per_message > verbosity:
+                verbosity=words_per_message
+                verbosest=a
+        st.write("### "+verbosest+" is the most wordy:",round(verbosity, 2),"words per message")
 
         st.markdown('## 2. Select person')
         author = st.selectbox('Select author', authorsList)
@@ -285,12 +296,12 @@ def page_perPerson(state):
         # Filtering out messages of particular user
         req_df= messages_df[messages_df["Author"] == author]
         # req_df will contain messages of only one particular user
-        st.write(f'Stats of {author} -')
+        st.write(f'Stats of {author}:')
         # shape will print number of rows which indirectly means the number of messages
         st.write('Messages Sent', req_df.shape[0])
         #Word_Count contains of total words in one message. Sum of all words/ Total Messages will yield words per message
         words_per_message = (np.sum(req_df['Word_Count']))/req_df.shape[0]
-        st.write('Words per message', words_per_message)
+        st.write('Words per message', round(words_per_message, 2))
         #media conists of media messages
         media = media_messages_df[media_messages_df['Author'] == author].shape[0]
         st.write('Media Messages Sent', media)
