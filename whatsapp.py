@@ -393,6 +393,8 @@ def page_allPersons(state):
 
         stopwords = set(wordcloud.STOPWORDS)
         stopwords.update(["wa","ra", "ga", "na", "ani", "em", "ki", "ah","ha","la","eh","ne","le","https","http","www","image","audio","omitted"])
+        #st.write([x for x in dataDash['Author'].unique()])
+        stopwords.update([x for x in dataDash['Author'].unique()])
         df_textFreq=pd.DataFrame(textFreq.items(),columns=["text","freq"])
         df_textFreq = df_textFreq[~df_textFreq['text'].isin(stopwords)]
         #st.write(df_textFreq.nlargest(25, ['freq']) )
