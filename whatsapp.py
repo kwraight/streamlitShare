@@ -269,7 +269,7 @@ def page_perPerson(state):
         authors_df['MessageCount']=1
         authors_df= authors_df.groupby("Author").sum()
         authors_df.reset_index(inplace=True)
-        st.dataframe(authors_df)
+        #st.dataframe(authors_df)
 
         st.markdown('## 1. Contribution chart')
         authFig = px.pie(authors_df, values='MessageCount', names='Author')
@@ -281,7 +281,6 @@ def page_perPerson(state):
 
         verbosest="NYS"
         verbosity=-1
-        st.write(np.sum(messages_df.query('Author=="Sandy"')['Word_Count']))
         for a in messages_df["Author"].unique():
             words_per_message = np.sum(messages_df.query('Author=="'+a+'"')['Word_Count'])/messages_df.query('Author=="'+a+'"').shape[0]
             if words_per_message > verbosity:
