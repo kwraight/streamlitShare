@@ -44,7 +44,7 @@ def main():
 #####################
 def display_state_values(state):
     st.write("file:", state.file)
-    st.write("df:")
+    st.write("last entries of dataframe:")
     try:
         st.dataframe(state.df.tail())
     except AttributeError:
@@ -53,7 +53,7 @@ def display_state_values(state):
 def page_checking(state):
     st.title(":clipboard: Checking page")
     st.write("---")
-    st.write("This is the values retained in the state data:")
+    st.write("This is current data:")
     display_state_values(state)
 
     st.write("## :exclamation: Clear all state settings")
@@ -206,19 +206,19 @@ def page_selection(state):
 
     ## drag and drop method
     state.file = st.file_uploader("Upload a file", type=["txt","zip"])
-    st.write(state.file)
+    #st.write(state.file)
 
     #dataSel = GetData(join(state.selectDir, state.selectFile))
     if state.file != None:
         dataSel = GetDataByIO(state.file)
 
         ### total dataSet
-        st.write('All data')
+        st.write('## Most recent data')
         st.dataframe(dataSel.tail())
 
         end_df=dataSel.tail(1)
         end_df["Date"]=pd.to_datetime(end_df["Date"], format='%d/%m/%Y')
-        st.markdown(f'## Stats of {end_df.iloc[0]["Date"].day:02}/{end_df.iloc[0]["Date"].month:02}/{end_df.iloc[0]["Date"].year:04}, {end_df.iloc[0]["Time"]}')
+        st.markdown(f'### Stats up to {end_df.iloc[0]["Date"].day:02}/{end_df.iloc[0]["Date"].month:02}/{end_df.iloc[0]["Date"].year:04}, {end_df.iloc[0]["Time"]}')
 
         state.df=dataSel
 
