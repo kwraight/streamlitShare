@@ -419,7 +419,7 @@ def page_allPersons(state):
 
         #st.write(stopwords)
         # Generate a word cloud image
-        wcImg = wordcloud.WordCloud(stopwords=stopwords, background_color="white").generate(text)
+        wcImg = wordcloud.WordCloud(stopwords=stopwords, background_color="white",collocations=False).generate(text)
         # Display the generated image:
         # the matplotlib way:
 
