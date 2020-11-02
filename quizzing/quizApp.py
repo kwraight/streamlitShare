@@ -119,15 +119,19 @@ def page_debug(state):
 #####################
 def page_top(state):
     nowTime = datetime.datetime.now()
-    st.write("""## :fireworks: Welcome to the **Great \'Ritchie T\'** Quiz :fireworks: """)
+    st.write("""## :fireworks: Welcome to the **Great *Ritchie T* Quiz ** :fireworks: """)
+    st.write("""**NB** Satisfaction is unsupported in the current version.""")
     st.write("""### :calendar: ("""+DateFormat(nowTime)+""")""")
     st.write(" --- ")
     ###
 
-    st.write("Total questions:",len(bigList))
+    st.write("Four rounds of questions to measure your post-lockdown concentration.")
+    for r,c in zip(["one", "two", "three", "four"],["r1","r2","r3","r4"]):
+        st.write("  * Round "+r+": "+str(len([q for q in bigList if c in q.code]))+" questions")
 
-    if st.button("Ready"):
+    if st.button("Ready?"):
         state.score={}
+        st.write("Then move *yer arse*")
 
     if state.debug:
         st.write("score:",sum(state.score.values()))
