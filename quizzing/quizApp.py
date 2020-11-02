@@ -28,7 +28,7 @@ def DateFormat(dt):
     return str("{0:02}-{1:02}-{2:04}".format(dt.day,dt.month,dt.year))+" at "+str("{0:02}:{1:02}".format(dt.hour,dt.minute))
 
 def GetResult(q,num):
-    st.write("### Q."+str(num)+q.text)
+    st.write("### Q."+str(num)+" "+q.text)
     ans=selectbox_with_default("", q.options)
     #st.write("debug:",ans)
     if ans in q.options[q.index]:
@@ -146,6 +146,7 @@ def page_first(state):
     endOfRound=False
     qList=[q for q in bigList if "r1" in q.code.lower()]
     while GetResult(qList[count],count+1):
+        if state.debug: st.write("question code:",qList[count].code)
         state.score[qList[count].code]=qList[count].points
         count+=1
         if count>=len(qList):
