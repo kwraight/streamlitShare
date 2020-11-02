@@ -142,11 +142,16 @@ def page_first(state):
 
     ### questions
     count=0
+    try:
+        len(state.score.values())
+    except:
+        state.score={}
 
     endOfRound=False
     qList=[q for q in bigList if "r1" in q.code.lower()]
+    st.write(qList)
     while GetResult(qList[count],count+1):
-        if state.debug: st.write("question code:",qList[count].code)
+        if state.debug: st.write("question code:",qList[count].code,"("+str(qList[count].points)+")")
         state.score[qList[count].code]=qList[count].points
         count+=1
         if count>=len(qList):
@@ -177,6 +182,10 @@ def page_second(state):
 
     ### questions
     count=0
+    try:
+        len(state.score.values())
+    except:
+        state.score={}
 
     endOfRound=False
     qList=[q for q in bigList if "r2" in q.code.lower()]
