@@ -62,7 +62,7 @@ def main():
     }
 
     ### sidebar
-    st.sidebar.title(":smile: Basic WebApp")
+    st.sidebar.title(":smile: Quiz WebApp")
     page = st.sidebar.radio("Select your page", tuple(pages.keys()))
 
     ### mini-state summary
