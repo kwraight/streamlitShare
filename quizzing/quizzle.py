@@ -43,14 +43,16 @@ def GetResult(q,num):
 ################
 ### intro
 nowTime = datetime.datetime.now()
-st.write("""## Welcome to Sandy's Quiz on """+dateFormat(nowTime))
+st.write("""## Welcome to the **Great \'Ritchie T\'** Quiz """)
+st.write("""### ("""+dateFormat(nowTime)+""")""")
+st.write(" --- ")
 
 ### questions
 count=0
-score=[]
+score={}
 endOfQuiz=False
 while GetResult(qList[count],count+1):
-    score.append(qList[count].points)
+    score[qList[count].code]=qList[count].points
     count+=1
     if count>=len(qList):
         endOfQuiz=True
@@ -60,6 +62,7 @@ while GetResult(qList[count],count+1):
 ### sign off
 if endOfQuiz:
     st.balloons()
+    st.write(" --- ")
     st.write("## End of quiz")
-    st.write("### Final score:",sum(score))
-    st.write("### each result:",*score)
+    st.write("### Final score:",sum(score.values()))
+    st.write("### each result:",*score.values())
