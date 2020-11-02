@@ -55,14 +55,17 @@ def main():
     ### define pages dictionary
     pages = {
         "Top Page": page_top,
-        "First": page_first,
-        "Second": page_second,
+        "Round 1": page_one,
+        "Round 2": page_two,
+        "Round 3": page_three,
+        "Round 4": page_four,
         "Results": page_results,
-        "Debug": page_debug,
+        "Broom cupboard": page_debug,
     }
 
     ### sidebar
     st.sidebar.title(":smile: Quiz WebApp")
+    st.sidebar.markdown("---")
     page = st.sidebar.radio("Select your page", tuple(pages.keys()))
 
     ### mini-state summary
@@ -73,6 +76,7 @@ def main():
     #         st.sidebar.markdown("No data yet selected")
 
     ### debug toggle
+    st.sidebar.markdown("---")
     debug = st.sidebar.checkbox("Toggle debug")
     if debug:
         state.debug=True
@@ -100,9 +104,9 @@ def display_state_values(state):
         st.write("No data available")
 
 def page_debug(state):
-    st.title(":clipboard: Checking page")
+    st.title(":wrench: Broom cupboard")
     st.write("---")
-    st.write("This is the values retained in the state data:")
+    st.write("Bits and bobs for maintainance:")
     display_state_values(state)
 
     st.write("## :exclamation: Clear all state settings")
@@ -115,8 +119,8 @@ def page_debug(state):
 #####################
 def page_top(state):
     nowTime = datetime.datetime.now()
-    st.write("""## Welcome to the **Great \'Ritchie T\'** Quiz """)
-    st.write("""### ("""+DateFormat(nowTime)+""")""")
+    st.write("""## :fireworks: Welcome to the **Great \'Ritchie T\'** Quiz :fireworks: """)
+    st.write("""### :calendar: ("""+DateFormat(nowTime)+""")""")
     st.write(" --- ")
     ###
 
@@ -130,12 +134,12 @@ def page_top(state):
         st.write("score per question:",*state.score.values())
 
 #####################
-### First page
+### First round
 #####################
-def page_first(state):
+def page_one(state):
     st.title(":question: Round 1")
     st.write("---")
-    st.write("## Instruction")
+    st.write("## Instructions")
     st.write("  * answer them questions")
     st.write("---")
     ###
@@ -170,12 +174,12 @@ def page_first(state):
 
 
 #####################
-### Second page
+### Second round
 #####################
-def page_second(state):
+def page_two(state):
     st.title(":question: Round 2")
     st.write("---")
-    st.write("## Instruction")
+    st.write("## Instructions")
     st.write("  * answer them questions")
     st.write("---")
     ###
@@ -206,14 +210,87 @@ def page_second(state):
         st.write("### Round score:",sum(results))
         st.write("### each result:",*results)
 
+#####################
+### Third round
+#####################
+def page_three(state):
+    st.title(":question: Round 3")
+    st.write("---")
+    st.write("## Instructions")
+    st.write("  * answer them questions")
+    st.write("---")
+    ###
+
+    ### questions
+    count=0
+    try:
+        len(state.score.values())
+    except:
+        state.score={}
+
+    endOfRound=False
+    qList=[q for q in bigList if "r3" in q.code.lower()]
+    while GetResult(qList[count],count+1):
+        state.score[qList[count].code]=qList[count].points
+        count+=1
+        if count>=len(qList):
+            endOfRound=True
+            break
+    #st.write("debug:",count)
+
+    ### sign off
+    if endOfRound:
+        st.balloons()
+        st.write(" --- ")
+        st.write("## End of round 3")
+        results=[v for k,v in state.score.items() if "r3" in k]
+        st.write("### Round score:",sum(results))
+        st.write("### each result:",*results)
+
+#####################
+### Fourth round
+#####################
+def page_four(state):
+    st.title(":question: Round 4")
+    st.write("---")
+    st.write("## Instructions")
+    st.write("  * answer them questions")
+    st.write("---")
+    ###
+
+    ### questions
+    count=0
+    try:
+        len(state.score.values())
+    except:
+        state.score={}
+
+    endOfRound=False
+    qList=[q for q in bigList if "r4" in q.code.lower()]
+    while GetResult(qList[count],count+1):
+        state.score[qList[count].code]=qList[count].points
+        count+=1
+        if count>=len(qList):
+            endOfRound=True
+            break
+    #st.write("debug:",count)
+
+    ### sign off
+    if endOfRound:
+        st.balloons()
+        st.write(" --- ")
+        st.write("## End of round 4")
+        results=[v for k,v in state.score.items() if "r4" in k]
+        st.write("### Round score:",sum(results))
+        st.write("### each result:",*results)
 
 #####################
 ### Results page
 #####################
 def page_results(state):
-    st.title(":smile: Results")
+    st.title(":bar_chart: Results")
     st.write("---")
-    st.write("## Instruction")
+    st.write("## Visual data delights :cake:")
     st.write("---")
     ###
 
