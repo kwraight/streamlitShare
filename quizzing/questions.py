@@ -15,6 +15,6 @@ quizList.append({
 
 quizList.append({
 'code':"r2q1",
-'text':"Does Ritchie T tell lies",
+'text':"Does Ritchie T tell lies?",
 'options':["Aye, hunners","Maybe just a wee bit","Ritchie T: he tell no lies"],
 'index':2, 'points':5})
