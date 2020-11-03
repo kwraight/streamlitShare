@@ -38,6 +38,15 @@ def GetResult(q,num):
         st.write("### Incorrect. Try again")
         return False
 
+def RoundSummary(score, num):
+    st.balloons()
+    st.write(" --- ")
+    st.write("## End of round "+str(num))
+    results=[v for k,v in score.items() if "r"+str(num) in k]
+    st.write("### Round score:",sum(results))
+    st.write("### each result:",*results)
+
+
 ################
 ### Set quiz dictionaries
 ################
@@ -55,10 +64,10 @@ def main():
     ### define pages dictionary
     pages = {
         "Top Page": page_top,
-        "Round 1": page_one,
-        "Round 2": page_two,
-        "Round 3": page_three,
-        "Round 4": page_four,
+        "Round 1: TBC": page_one,
+        "Round 2: TBC": page_two,
+        "Round 3: TBC": page_three,
+        "Round 4: TBC": page_four,
         "Results": page_results,
         "Broom cupboard": page_debug,
     }
@@ -66,7 +75,7 @@ def main():
     ### sidebar
     st.sidebar.title(":smile: Quiz WebApp")
     st.sidebar.markdown("---")
-    page = st.sidebar.radio("Select your page", tuple(pages.keys()))
+    page = st.sidebar.radio("Select your page:", tuple(pages.keys()))
 
     ### mini-state summary
     # if st.sidebar.button("State Summary"):
@@ -119,8 +128,8 @@ def page_debug(state):
 #####################
 def page_top(state):
     nowTime = datetime.datetime.now()
-    st.write("""## :fireworks: Welcome to the **Great *Ritchie T* Quiz ** :fireworks: """)
-    st.write("""**NB** Satisfaction is unsupported in the current version.""")
+    st.write("""## :fireworks: Welcome to **The Great *Ritchie T* Quiz ** :fireworks: """)
+    st.write("""**NB** Satisfaction is not supported in the current version.""")
     st.write("""### :calendar: ("""+DateFormat(nowTime)+""")""")
     st.write(" --- ")
     ###
@@ -157,24 +166,20 @@ def page_one(state):
 
     endOfRound=False
     qList=[q for q in bigList if "r1" in q.code.lower()]
-    st.write(qList)
-    while GetResult(qList[count],count+1):
-        if state.debug: st.write("question code:",qList[count].code,"("+str(qList[count].points)+")")
-        state.score[qList[count].code]=qList[count].points
-        count+=1
-        if count>=len(qList):
-            endOfRound=True
-            break
-    #st.write("debug:",count)
+    if len(qList)>0:
+        while GetResult(qList[count],count+1):
+            state.score[qList[count].code]=qList[count].points
+            count+=1
+            if count>=len(qList):
+                endOfRound=True
+                break
+        #st.write("debug:",count)
+    else:
+        st.write("No questions here.")
 
     ### sign off
     if endOfRound:
-        st.balloons()
-        st.write(" --- ")
-        st.write("## End of round 1")
-        results=[v for k,v in state.score.items() if "r1" in k]
-        st.write("### Round score:",sum(results))
-        st.write("### each result:",*results)
+        RoundSummary(state.score,1)
 
 
 #####################
@@ -197,22 +202,20 @@ def page_two(state):
 
     endOfRound=False
     qList=[q for q in bigList if "r2" in q.code.lower()]
-    while GetResult(qList[count],count+1):
-        state.score[qList[count].code]=qList[count].points
-        count+=1
-        if count>=len(qList):
-            endOfRound=True
-            break
-    #st.write("debug:",count)
+    if len(qList)>0:
+        while GetResult(qList[count],count+1):
+            state.score[qList[count].code]=qList[count].points
+            count+=1
+            if count>=len(qList):
+                endOfRound=True
+                break
+        #st.write("debug:",count)
+    else:
+        st.write("No questions here.")
 
     ### sign off
     if endOfRound:
-        st.balloons()
-        st.write(" --- ")
-        st.write("## End of round 2")
-        results=[v for k,v in state.score.items() if "r2" in k]
-        st.write("### Round score:",sum(results))
-        st.write("### each result:",*results)
+        RoundSummary(state.score,2)
 
 #####################
 ### Third round
@@ -234,22 +237,20 @@ def page_three(state):
 
     endOfRound=False
     qList=[q for q in bigList if "r3" in q.code.lower()]
-    while GetResult(qList[count],count+1):
-        state.score[qList[count].code]=qList[count].points
-        count+=1
-        if count>=len(qList):
-            endOfRound=True
-            break
-    #st.write("debug:",count)
+    if len(qList)>0:
+        while GetResult(qList[count],count+1):
+            state.score[qList[count].code]=qList[count].points
+            count+=1
+            if count>=len(qList):
+                endOfRound=True
+                break
+        #st.write("debug:",count)
+    else:
+        st.write("No questions here.")
 
     ### sign off
     if endOfRound:
-        st.balloons()
-        st.write(" --- ")
-        st.write("## End of round 3")
-        results=[v for k,v in state.score.items() if "r3" in k]
-        st.write("### Round score:",sum(results))
-        st.write("### each result:",*results)
+        RoundSummary(state.score,3)
 
 #####################
 ### Fourth round
@@ -271,22 +272,20 @@ def page_four(state):
 
     endOfRound=False
     qList=[q for q in bigList if "r4" in q.code.lower()]
-    while GetResult(qList[count],count+1):
-        state.score[qList[count].code]=qList[count].points
-        count+=1
-        if count>=len(qList):
-            endOfRound=True
-            break
-    #st.write("debug:",count)
+    if len(qList)>0:
+        while GetResult(qList[count],count+1):
+            state.score[qList[count].code]=qList[count].points
+            count+=1
+            if count>=len(qList):
+                endOfRound=True
+                break
+        #st.write("debug:",count)
+    else:
+        st.write("No questions here.")
 
     ### sign off
     if endOfRound:
-        st.balloons()
-        st.write(" --- ")
-        st.write("## End of round 4")
-        results=[v for k,v in state.score.items() if "r4" in k]
-        st.write("### Round score:",sum(results))
-        st.write("### each result:",*results)
+        RoundSummary(state.score,4)
 
 #####################
 ### Results page
