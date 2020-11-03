@@ -157,13 +157,13 @@ def page_one(state):
     st.write("---")
     ###
 
-    ### questions
-    count=0
+    ### check score exists
     try:
         len(state.score.values())
     except:
         state.score={}
-
+    ### questions
+    count=0
     endOfRound=False
     qList=[q for q in bigList if "r1" in q.code.lower()]
     if len(qList)>0:
@@ -193,13 +193,13 @@ def page_two(state):
     st.write("---")
     ###
 
-    ### questions
-    count=0
+    ### check score exists
     try:
         len(state.score.values())
     except:
         state.score={}
-
+    ### questions
+    count=0
     endOfRound=False
     qList=[q for q in bigList if "r2" in q.code.lower()]
     if len(qList)>0:
@@ -228,13 +228,13 @@ def page_three(state):
     st.write("---")
     ###
 
-    ### questions
-    count=0
+    ### check score exists
     try:
         len(state.score.values())
     except:
         state.score={}
-
+    ### questions
+    count=0
     endOfRound=False
     qList=[q for q in bigList if "r3" in q.code.lower()]
     if len(qList)>0:
@@ -263,13 +263,13 @@ def page_four(state):
     st.write("---")
     ###
 
-    ### questions
-    count=0
+    ### check score exists
     try:
         len(state.score.values())
     except:
         state.score={}
-
+    ### questions
+    count=0
     endOfRound=False
     qList=[q for q in bigList if "r4" in q.code.lower()]
     if len(qList)>0:
