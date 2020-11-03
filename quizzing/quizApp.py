@@ -297,10 +297,18 @@ def page_results(state):
     st.write("---")
     ###
 
+    ### check score exists
+    try:
+        len(state.score.values())
+    except:
+        state.score={}
+    ### make dataframe from results
     df_results=pd.DataFrame(state.score.items(), columns=["code","points"])
     roundDict={"r1":"one","r2":"two"}
+    # define rounds
     df_results['round']=df_results['code'].apply(lambda x:roundDict[str(x)[0:2]])
     st.write(df_results)
+    ### bar chart of results per round
     resBar=alt.Chart(df_results).mark_bar().encode(
     x='round:O',
     y='sum(points):Q',
