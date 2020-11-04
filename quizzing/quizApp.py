@@ -32,11 +32,11 @@ def GetResult(q,num):
     ans=selectbox_with_default("", q.options)
     #st.write("debug:",ans)
     if ans in q.options[q.index]:
-        st.write("### Correct :smile: "+str(q.points)+" points")
-        return True
+        return q.points
+    elif "< PICK A VALUE >" in ans:
+        return -1
     else:
-        st.write("### Incorrect. Try again")
-        return False
+        return 0
 
 def RoundSummary(score, num):
     st.balloons()
@@ -167,12 +167,15 @@ def page_one(state):
     endOfRound=False
     qList=[q for q in bigList if "r1" in q.code.lower()]
     if len(qList)>0:
-        while GetResult(qList[count],count+1):
-            state.score[qList[count].code]=qList[count].points
+        points=GetResult(qList[count],count+1)
+        while points>-1:
+            state.score[qList[count].code]=points
+            if state.debug: st.write("""### points: """+str(points))
             count+=1
             if count>=len(qList):
                 endOfRound=True
                 break
+            points=GetResult(qList[count],count+1)
         #st.write("debug:",count)
     else:
         st.write("No questions here.")
@@ -203,12 +206,15 @@ def page_two(state):
     endOfRound=False
     qList=[q for q in bigList if "r2" in q.code.lower()]
     if len(qList)>0:
-        while GetResult(qList[count],count+1):
-            state.score[qList[count].code]=qList[count].points
+        points=GetResult(qList[count],count+1)
+        while points>-1:
+            state.score[qList[count].code]=points
+            if state.debug: st.write("""### points: """+str(points))
             count+=1
             if count>=len(qList):
                 endOfRound=True
                 break
+            points=GetResult(qList[count],count+1)
         #st.write("debug:",count)
     else:
         st.write("No questions here.")
@@ -238,12 +244,15 @@ def page_three(state):
     endOfRound=False
     qList=[q for q in bigList if "r3" in q.code.lower()]
     if len(qList)>0:
-        while GetResult(qList[count],count+1):
-            state.score[qList[count].code]=qList[count].points
+        points=GetResult(qList[count],count+1)
+        while points>-1:
+            state.score[qList[count].code]=points
+            if state.debug: st.write("""### points: """+str(points))
             count+=1
             if count>=len(qList):
                 endOfRound=True
                 break
+            points=GetResult(qList[count],count+1)
         #st.write("debug:",count)
     else:
         st.write("No questions here.")
@@ -273,12 +282,15 @@ def page_four(state):
     endOfRound=False
     qList=[q for q in bigList if "r4" in q.code.lower()]
     if len(qList)>0:
-        while GetResult(qList[count],count+1):
-            state.score[qList[count].code]=qList[count].points
+        points=GetResult(qList[count],count+1)
+        while points>-1:
+            state.score[qList[count].code]=points
+            if state.debug: st.write("""### points: """+str(points))
             count+=1
             if count>=len(qList):
                 endOfRound=True
                 break
+            points=GetResult(qList[count],count+1)
         #st.write("debug:",count)
     else:
         st.write("No questions here.")
