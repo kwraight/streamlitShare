@@ -105,8 +105,8 @@ def page_top(state):
 
     if state.debug:
         st.write("Debug is on")
+        st.write("Current directory:",cwd)
 
-    st.write(cwd)
 
 #####################
 ### Experiments
@@ -119,7 +119,7 @@ def page_exp(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv("experiments.csv")
+    df_new=pd.read_csv(cwd+"/data/experiments.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
@@ -165,7 +165,7 @@ def page_acc(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv('./data/accelerators.csv')
+    df_new=pd.read_csv(cwd+"/data/accelerators.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
@@ -207,7 +207,7 @@ def page_lab(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv('./data/laboratories.csv')
+    df_new=pd.read_csv(cwd+"/data/laboratories.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
