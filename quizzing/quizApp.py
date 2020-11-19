@@ -6,10 +6,8 @@ import streamlit as st
 ### plotly
 import plotly.express as px
 import plotly.graph_objects as go
-### datapane
+### altair
 import altair as alt
-### infrastructure
-import infrastructure
 # particular
 import infrastructure as infra
 import questions
