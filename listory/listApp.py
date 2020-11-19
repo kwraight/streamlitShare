@@ -11,7 +11,7 @@ import os
 cwd = os.getcwd()
 from os import listdir
 from os.path import isfile, join
-onlyfiles = [f for f in os.listdir(cwd) if os.path.isfile(os.path.join(cwd, f))]
+onlyfiles = [f for f in os.listdir()]
 otherfiles = [f for f in os.listdir(cwd+"/data/") if os.path.isfile(os.path.join(cwd+"/data/", f))]
 import temp
 
