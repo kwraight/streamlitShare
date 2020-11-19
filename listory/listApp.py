@@ -176,8 +176,8 @@ def page_acc(state):
     st.write("  * Non-comprehensive list of PP experiments")
     st.write("---")
     ###
-
-    df_new=pd.read_csv(cwd+"/data/accelerators.csv")
+    
+    df_new=pd.read_csv("/listory/data/accelerators.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
