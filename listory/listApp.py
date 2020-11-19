@@ -115,7 +115,7 @@ def page_exp(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv("data/experiments.csv")
+    df_new=pd.read_csv("./data/experiments.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
@@ -161,7 +161,7 @@ def page_acc(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv('data/accelerators.csv')
+    df_new=pd.read_csv('./data/accelerators.csv')
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
@@ -203,7 +203,7 @@ def page_lab(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv('data/laboratories.csv')
+    df_new=pd.read_csv('./data/laboratories.csv')
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
