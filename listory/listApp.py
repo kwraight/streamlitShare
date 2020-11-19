@@ -12,6 +12,7 @@ cwd = os.getcwd()
 from os import listdir
 from os.path import isfile, join
 onlyfiles = [f for f in os.listdir(cwd) if os.path.isfile(os.path.join(cwd, f))]
+import temp
 
 ################
 ### Useful functions
@@ -111,6 +112,8 @@ def page_top(state):
         st.write("Current directory:",cwd)
 
     st.write(onlyfiles)
+
+    st.write(temp.Hello())
 
 #####################
 ### Experiments
