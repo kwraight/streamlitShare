@@ -119,7 +119,7 @@ def page_exp(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv(cwd+"/data/experiments.csv")
+    df_new=pd.read_csv(cwd+"/experiments.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
