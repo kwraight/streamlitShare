@@ -7,6 +7,8 @@ import streamlit as st
 import altair as alt
 # particular
 import infrastructure as infra
+import os
+cwd = os.getcwd()
 
 ################
 ### Useful functions
@@ -103,6 +105,8 @@ def page_top(state):
 
     if state.debug:
         st.write("Debug is on")
+
+    st.write(cwd)
 
 #####################
 ### Experiments
