@@ -9,11 +9,6 @@ import altair as alt
 import infrastructure as infra
 import os
 cwd = os.getcwd()
-from os import listdir
-from os.path import isfile, join
-onlyfiles = [f for f in os.listdir()]
-#otherfiles = [f for f in os.listdir(cwd+"/data/") if os.path.isfile(os.path.join(cwd+"/data/", f))]
-import temp
 
 ################
 ### Useful functions
@@ -111,14 +106,7 @@ def page_top(state):
     if state.debug:
         st.write("Debug is on")
         st.write("Current directory:",cwd)
-
-    st.write(cwd)
-    st.write(onlyfiles)
-
-    #st.write(cwd+"/data/")
-    #st.write(otherfiles)
-
-    st.write(temp.Hello())
+        
 
 #####################
 ### Experiments
@@ -131,7 +119,7 @@ def page_exp(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv(cwd+"/experiments.csv")
+    df_new=pd.read_csv(cwd+"/listory/data/experiments.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
@@ -219,7 +207,7 @@ def page_lab(state):
     st.write("---")
     ###
 
-    df_new=pd.read_csv(cwd+"/data/laboratories.csv")
+    df_new=pd.read_csv(cwd+"/listory/data/laboratories.csv")
 
     df_new['End'] = df_new['End'].str.replace(' ', '')
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
