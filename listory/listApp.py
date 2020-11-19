@@ -12,6 +12,7 @@ cwd = os.getcwd()
 from os import listdir
 from os.path import isfile, join
 onlyfiles = [f for f in os.listdir(cwd) if os.path.isfile(os.path.join(cwd, f))]
+otherfiles = [f for f in os.listdir(cwd+"/data/") if os.path.isfile(os.path.join(cwd+"/data/", f))]
 import temp
 
 ################
@@ -111,7 +112,11 @@ def page_top(state):
         st.write("Debug is on")
         st.write("Current directory:",cwd)
 
+    st.write(cwd)
     st.write(onlyfiles)
+
+    st.write(cwd+"/data/")
+    st.write(otherfiles)
 
     st.write(temp.Hello())
 
