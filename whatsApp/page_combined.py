@@ -24,7 +24,14 @@ def main_part(state):
     st.markdown(" 4. Week profile")
     st.markdown(" 5. Day profile")
 
-    if state.df is not None:
+    doStuff=False
+    try:
+        if state.df:
+            doStuff=True
+    except AttributeError:
+        st.error("No data yet defined")
+
+    if doStuff:
         dataDash = state.df
         dataDash["Date"] = pd.to_datetime(dataDash["Date"], format='%d/%m/%Y')
         dataDash = dataDash.dropna()
@@ -160,6 +167,3 @@ def main_part(state):
           showlegend=False
         )
         st.write(hourFig)
-
-    else:
-        st.write("No data selected")

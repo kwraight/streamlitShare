@@ -1,4 +1,15 @@
 import streamlit as st
+### data manipulation
+import re
+import numpy as np
+### emojis
+import emoji
+from collections import Counter
+### plotting
+import wordcloud
+import matplotlib.pyplot as plt
+import plotly.express as px
+import altair as alt
 
 #####################
 ### Dashboard per person
@@ -13,7 +24,14 @@ def main_part(state):
     st.markdown(" 4. Emoji chart")
     st.markdown(" 5. Word cloud")
 
-    if state.df is not None:
+    doStuff=False
+    try:
+        if state.df:
+            doStuff=True
+    except AttributeError:
+        st.error("No data yet defined")
+
+    if doStuff:
         dataDash = state.df
         dataDash["Date"] = pd.to_datetime(dataDash["Date"], format='%d/%m/%Y')
         dataDash = dataDash.dropna()
@@ -111,6 +129,3 @@ def main_part(state):
         plt.axis("off")
         st.markdown("## 5. World cloud for "+author)
         st.write(wcFig)
-
-    else:
-        st.write("No data selected")
