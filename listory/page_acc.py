@@ -17,7 +17,6 @@ def main_part(state):
 
     df_new=df_new.rename(columns=lambda x: x.strip())
     df_new=df_new.rename(columns={"Location": "Laboratory"})
-    st.write(df_new)
     for c in list(df_new.columns):
         try:
             df_new[c]=df_new[c].str.strip()
