@@ -5,9 +5,9 @@ import sys
 cwd = os.getcwd()
 sys.path.insert(1, cwd)
 ### for streamlitShare
-#cwd = os.getcwd()
+cwd = os.getcwd()
 ### for laptop
-cwd = "/Users/kwraight/repositories/streamlitShare"
+#cwd = "/Users/kwraight/repositories/streamlitShare"
 
 #####################
 ### Top page

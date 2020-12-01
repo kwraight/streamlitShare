@@ -26,10 +26,10 @@ def main_part(state):
     df_new['End'] = df_new['End'].str.replace('\xa0', '')
     df_new.loc[df_new['End']=="--",'End']="2020"
     df_new.loc[df_new['End']=="",'End']="2020"
-    if state.debug: st.write(df_new['End'].unique())
+    if state.debug: st.write(list(df_new['End'].unique()))
 
     df_new['Begin'] = df_new['Begin'].str.replace(' ', '')
-    if state.debug: st.write(df_new['Begin'].unique())
+    if state.debug: st.write(list(df_new['Begin'].unique()))
 
     df_new['Begin'].loc[df_new['Begin']=='nan']
     df_new.drop(df_new.loc[df_new['Begin']=="TBC"].index, inplace=True)
