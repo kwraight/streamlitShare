@@ -1,6 +1,7 @@
 ### streamlit stuff
 import streamlit as st
-import streamlit.report_thread as ReportThread
+#import streamlit.report_thread as ReportThread
+import streamlit.ReportThread as ReportThread
 from streamlit.hashing import _CodeHasher
 from streamlit.server.server import Server
 
