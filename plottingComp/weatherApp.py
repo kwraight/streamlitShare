@@ -107,7 +107,7 @@ def PlotlyPlot(df):
 ### Weather info.
 ################
 ## set API key
-owm = pyowm.OWM("a0f2bf5ef2566260b6ad12ba42f96c95")
+owm = pyowm.OWM("")
 ## make manager
 mgr = owm.weather_manager()
 ## set location
