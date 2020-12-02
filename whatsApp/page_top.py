@@ -1,6 +1,8 @@
 import streamlit as st
 import datetime
 ### data manipulation
+from io import StringIO
+import pandas as pd
 import re
 ### emojis
 import emoji
@@ -130,17 +132,6 @@ def GetDataByIO(fileIO):
 
     return pd.DataFrame(parsedData, columns=['Date', 'Time', 'Author', 'Message']) # Initialising a pandas Dataframe.
 
-def split_count(text):
-
-    emoji_list = []
-    #data = re.findall(r'\\X', text)
-    data=text
-    #print(data)
-    for word in data:
-        if any(char in emoji.UNICODE_EMOJI for char in word):
-            emoji_list.append(word)
-
-    return emoji_list
 
 def main_part(state):
     nowTime = datetime.datetime.now()
@@ -157,13 +148,25 @@ def main_part(state):
     st.markdown("  b. Total chat statisics in *Dashboard (All)* ")
     st.markdown(" *NB* No data is retained ")
 
+    if state.debug:
+        st.write("Debug is on")
+
     ## drag and drop method
-    state.file = st.file_uploader("Upload a file", type=["txt","zip"])
-    #st.write(state.file)
+    uploaded_file= st.file_uploader("Upload a file", type=["txt","zip"])
+    if state.debug: st.write(uploaded_file)
 
     #dataSel = GetData(join(state.selectDir, state.selectFile))
-    if state.file != None:
-        dataSel = GetDataByIO(state.file)
+    if uploaded_file is not None:
+
+        bytes_data = uploaded_file.read()
+        #st.write(bytes_data)
+
+        stringio = StringIO(bytes_data.decode("utf-8"))
+        #string_data = stringio.read()
+        #st.write(string_data)
+
+        dataSel = GetDataByIO(stringio)
+        if state.debug: st.write(dataSel)
 
         ### total dataSet
         st.write('## Most recent data')

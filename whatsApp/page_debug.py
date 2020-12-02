@@ -4,7 +4,10 @@ import streamlit as st
 ### Check state page
 #####################
 def display_state_values(state):
-    st.write("file:", state.file)
+
+    st.write("## All data")
+    st.write("Debug setting:", state.debug)
+    
     st.write("last entries of dataframe:")
     try:
         st.dataframe(state.df.tail())

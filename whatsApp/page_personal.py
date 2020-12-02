@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 ### data manipulation
 import re
 import numpy as np
@@ -14,6 +15,20 @@ import altair as alt
 #####################
 ### Dashboard per person
 #####################
+
+def split_count(text):
+
+    emoji_list = []
+    #data = re.findall(r'\\X', text)
+    data=text
+    #print(data)
+    for word in data:
+        if any(char in emoji.UNICODE_EMOJI for char in word):
+            emoji_list.append(word)
+
+    return emoji_list
+
+
 def main_part(state):
     st.title(":chart_with_upwards_trend: Per Person Plots")
     st.write("---")
@@ -26,7 +41,7 @@ def main_part(state):
 
     doStuff=False
     try:
-        if state.df:
+        if state.df.empty==False:
             doStuff=True
     except AttributeError:
         st.error("No data yet defined")

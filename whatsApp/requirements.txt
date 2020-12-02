@@ -1,0 +1,8 @@
+numpy==1.18.4
+streamlit==0.61.0
+plotly==4.8.1
+emoji==0.5.4
+pandas==1.0.3
+altair==4.1.0
+matplotlib==3.3.1
+wordcloud==1.7.0
