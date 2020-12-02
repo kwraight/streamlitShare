@@ -12,7 +12,7 @@ def display_state_values(state):
 
     st.write("### requirements")
     try:
-        with open(state.cwd+'/whatsapp/requirements.txt', 'r') as file:
+        with open(state.cwd+'/requirements.txt', 'r') as file:
             data = file.read().replace('\n', ', ')
         st.write(data)
     except FileNotFoundError:
