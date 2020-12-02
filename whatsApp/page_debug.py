@@ -5,9 +5,15 @@ import streamlit as st
 #####################
 def display_state_values(state):
 
-    st.write("## All data")
+    st.write("## Internal")
     st.write("Debug setting:", state.debug)
-    
+
+    st.write("cwd:",state.cwd)
+
+    with open(state.cwd+'/listory/requirements.txt', 'r') as file:
+        data = file.read().replace('\n', ', ')
+
+    st.write("### Data")
     st.write("last entries of dataframe:")
     try:
         st.dataframe(state.df.tail())

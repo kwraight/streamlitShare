@@ -7,6 +7,12 @@ import re
 ### emojis
 import emoji
 from collections import Counter
+cwd = os.getcwd()
+sys.path.insert(1, cwd)
+### for streamlitShare
+cwd = os.getcwd()
+### for laptop
+#cwd = "/Users/kwraight/repositories/streamlitShare"
 
 #####################
 ### Select data page
@@ -150,6 +156,8 @@ def main_part(state):
 
     if state.debug:
         st.write("Debug is on")
+
+    state.cwd=cwd
 
     ## drag and drop method
     uploaded_file= st.file_uploader("Upload a file", type=["txt","zip"])
