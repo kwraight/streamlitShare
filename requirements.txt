@@ -1,0 +1,13 @@
+matplotlib==3.3.1
+plotly==4.8.1
+streamlit==0.71.0
+pandas==1.0.3
+numpy==1.18.4
+wordcloud==1.7.0
+stravalib==0.10.2
+stravaio==0.0.9
+altair==4.1.0
+emoji==0.5.4
+pyowm==3.0.0
+datapane==0.8.5
+Pillow==8.0.1
