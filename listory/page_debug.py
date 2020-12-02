@@ -5,7 +5,7 @@ import streamlit as st
 #####################
 def display_state_values(state):
 
-    st.write("## All data")
+    st.write("## Internal")
     st.write("Debug setting:", state.debug)
 
     st.write("cwd:",state.cwd)
