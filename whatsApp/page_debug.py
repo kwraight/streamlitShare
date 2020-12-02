@@ -10,12 +10,17 @@ def display_state_values(state):
 
     st.write("cwd:",state.cwd)
 
-    with open(state.cwd+'/listory/requirements.txt', 'r') as file:
-        data = file.read().replace('\n', ', ')
+    st.write("### requirements")
+    try:
+        with open(state.cwd+'/whatsapp/requirements.txt', 'r') as file:
+            data = file.read().replace('\n', ', ')
+        st.write(data)
+    except FileNotFoundError:
+        st.write("No requirements found")
 
     st.write("### Data")
-    st.write("last entries of dataframe:")
     try:
+        st.write("last entries of dataframe:")
         st.dataframe(state.df.tail())
     except AttributeError:
         st.write("No data selected")
