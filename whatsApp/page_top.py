@@ -7,6 +7,8 @@ import re
 ### emojis
 import emoji
 from collections import Counter
+import os
+import sys
 cwd = os.getcwd()
 sys.path.insert(1, cwd)
 ### for streamlitShare
