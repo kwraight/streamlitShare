@@ -9,12 +9,12 @@ def display_state_values(state):
     st.write("Debug setting:", state.debug)
 
     st.write("cwd:",state.cwd)
-    # try:
-    #     st.write(state.score)
-    #     df_results=pd.DataFrame(state.score.items(), columns=["code","points"])
-    #     st.write(df_results)
-    # except AttributeError:
-    #     st.write("No data available")
+
+    with open(cwd+'"/listory/requirements.txt', 'r') as file:
+        data = file.read().replace('\n', '')
+
+    st.write("### requirements")
+    st.write(data)
 
 def main_part(state):
     st.title(":wrench: Broom cupboard")
