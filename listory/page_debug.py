@@ -10,7 +10,7 @@ def display_state_values(state):
 
     st.write("cwd:",state.cwd)
 
-    with open(state.cwd+'"/listory/requirements.txt', 'r') as file:
+    with open(state.cwd+'/listory/requirements.txt', 'r') as file:
         data = file.read().replace('\n', '')
 
     st.write("### requirements")
