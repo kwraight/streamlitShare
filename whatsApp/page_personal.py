@@ -17,7 +17,6 @@ import altair as alt
 #####################
 
 def split_count(text):
-
     emoji_list = []
     #data = re.findall(r'\\X', text)
     data=text
@@ -25,7 +24,6 @@ def split_count(text):
     for word in data:
         if any(char in emoji.UNICODE_EMOJI for char in word):
             emoji_list.append(word)
-
     return emoji_list
 
 
