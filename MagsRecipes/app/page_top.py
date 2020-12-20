@@ -2,10 +2,10 @@ import streamlit as st
 import datetime
 import os
 import sys
-import json
-import subprocess
-import ast
-### PDB stuff
+cwd = os.getcwd()
+sys.path.insert(1, cwd)
+### for streamlitShare
+cwd = os.getcwd()
 
 #####################
 ### Top page
@@ -24,6 +24,8 @@ def main_part(state):
     st.write(" --- ")
     ###
 
-    # debug check
+    state.cwd=cwd
+
     if state.debug:
-        st.write("### Debug is on")
+        st.write("Debug is on")
+        st.write("Current directory:",cwd)
