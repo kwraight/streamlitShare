@@ -72,7 +72,7 @@ def main_part(state):
 
     ## get list of recipes and display
     recipeFiles=[]
-    myDir="Mags/recipes"
+    myDir="MagsRecipes/recipes"
     for file in os.listdir(myDir):
         if file.endswith(".rpy"):
             recipeFiles.append(file)
