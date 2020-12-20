@@ -72,8 +72,7 @@ def main_part(state):
 
     ## get list of recipes and display
     recipeFiles=[]
-    myDir="MagsRecipes/recipes"
-    #myDir="/Users/kwraight/repositories/streamlitShare/MagsRecipes/recipes"
+    myDir="Mags/recipes"
     for file in os.listdir(myDir):
         if file.endswith(".rpy"):
             recipeFiles.append(file)
