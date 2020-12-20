@@ -86,7 +86,7 @@ def main_part(state):
     # ## display recipe: ingredients section and method section
     repDict= GetRepiceDict(myDir+"/"+sel_rec[1])
     if state.debug: st.write(repDict)
-    st.write("### Recipe for",repDict['title'],"by *",repDict['author'],"*")
+    st.write("### Recipe for **",repDict['title'],"** by *",repDict['author'],"*")
     try:
         st.write("serves:",repDict['serves'])
     except KeyError:
