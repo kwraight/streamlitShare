@@ -9,6 +9,7 @@ author="Mags"
 # name:amount_unit
 ingredients=[
 "self-raising flour:8_oz",
+"sugar:15_g",
 "salt:0.25_tsp",
 "currents or raisons:2_tbsp",
 "egg:1_",

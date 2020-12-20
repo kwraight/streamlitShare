@@ -10,7 +10,7 @@ author="Mags"
 ingredients=[
 "flour:150_g",
 "margarine:25_g",
-"sugar:_",
+"sugar:15_g",
 "milk:6_tbsp"
 ]
 
