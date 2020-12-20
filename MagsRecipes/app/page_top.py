@@ -29,3 +29,4 @@ def main_part(state):
     if state.debug:
         st.write("Debug is on")
         st.write("Current directory:",cwd)
+        st.write(os.listdir())
