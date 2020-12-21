@@ -7,6 +7,8 @@ import sys
 cwd = os.getcwd()
 sys.path.insert(1, cwd)
 import stInfrastructure as infra
+### other
+from measurement.measures import Weight
 ### pages
 import page_top
 import page_choose
@@ -37,21 +39,20 @@ def main():
     st.sidebar.markdown("---")
     page = st.sidebar.radio("Select your page:", tuple(pages.keys()))
 
-    # ### mini-state summary
-    # if st.sidebar.button("State Summary"):
-    #     ### token
-    #     try:
-    #         if len(state.myToken)>0:
-    #             st.sidebar.markdown("Got token")
-    #         else:
-    #             st.sidebar.markdown("No token found")
-    #     except AttributeError:
-    #         st.sidebar.markdown("No token defined")
-    #     ### component IDs
-    #     try:
-    #         st.sidebar.markdown("Component IDs defined: "+str(len(state.ids)))
-    #     except AttributeError:
-    #         st.sidebar.markdown("No components defined")
+    ### mini converter
+    if st.sidebar.button("mini converter"):
+        try:
+            state.miniCon = not state.miniCon
+        except AttributeError:
+            state.miniCon = True
+
+    try:
+        if state.miniCon:
+            st.sidebar.markdown("### mini converter")
+            st.sidebar.selectbox("from unit", ["kg","lb","oz","g"])
+            st.sidebar.selectbox("to unit", ["kg","lb","oz","g"])
+    except:
+        pass
 
     ### debug toggle
     st.sidebar.markdown("---")
