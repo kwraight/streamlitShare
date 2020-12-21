@@ -27,4 +27,4 @@ def main_part(state):
 
     # debug check
     if state.debug:
-        st.write("### Debug is on")
+        st.error("Debug is on")

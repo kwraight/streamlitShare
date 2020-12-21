@@ -44,6 +44,9 @@ def main_part(state):
     st.write("## Bits and bobs for maintainance")
     st.write("---")
 
+    if state.debug:
+        st.error("Debug is on")
+
     display_state_values(state)
 
     st.write("## :exclamation: Clear all state settings")
