@@ -58,6 +58,8 @@ def main_part(state):
     st.write("---")
     st.write("## Choose your dish")
     if state.debug:
+        st.write("  * select recipe set")
+        st.write("  * filter type of dish (if preferred)")
         st.write("  * display list")
         st.write("  * select from list")
         st.write("  * display recipe")
