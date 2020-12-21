@@ -70,15 +70,27 @@ def main_part(state):
     if state.debug:
         st.write("### Debug is on")
 
+    ## select from list
+    sel_name=st.selectbox("Choose a recipe set", ["Mags","Kenny"])
+
+    sel_filt=infra.selectbox_with_default("filter by type",["sweet","savoury"],"Any type")
     ## get list of recipes and display
     recipeFiles=[]
-    myDir="MagsRecipes/recipes"
+    myDir="MagsRecipes/recipes/"+sel_name
     for file in os.listdir(myDir):
-        if file.endswith(".rpy"):
+        if file.endswith(".rpy") or file.endswith(".xpy"):
             recipeFiles.append(file)
+    st.write("Total recipes available:",len(recipeFiles))
+
+    # format dataframe
     df_list=pd.DataFrame(zip(recipeFiles, recipeFiles), columns=["name","file"])
-    df_list['name']=df_list['name'].apply(lambda x: GetName(x.replace(".rpy","")) )
-    infra.DisplayWithOption(df_list['name'],"1")
+    df_list['name']=df_list['name'].apply(lambda x: GetName(x.replace(".rpy","").replace(".xpy","")) )
+    typeMap={".xpy":"sweet",".rpy":"savoury"}
+    df_list['type']=df_list['file'].apply(lambda x: typeMap[x[-4::]]  )
+    df_list=df_list.sort_values("name")
+    if sel_filt!="Any type":
+        df_list=df_list.query("type=='"+sel_filt+"'")
+    infra.DisplayWithOption(df_list[['name','type']],"1")
 
     ## select from list
     sel_rec=st.selectbox("Choose a recipe", list(df_list.values), format_func=lambda x: x[0])
