@@ -33,21 +33,21 @@ def main():
     st.sidebar.markdown("---")
     page = st.sidebar.radio("Select your page:", tuple(pages.keys()))
 
-    ### mini-state summary
-    if st.sidebar.button("State Summary"):
-        ### token
-        try:
-            if len(state.myToken)>0:
-                st.sidebar.markdown("Got token")
-            else:
-                st.sidebar.markdown("No token found")
-        except AttributeError:
-            st.sidebar.markdown("No token defined")
-        ### component IDs
-        try:
-            st.sidebar.markdown("Component IDs defined: "+str(len(state.ids)))
-        except AttributeError:
-            st.sidebar.markdown("No components defined")
+    # ### mini-state summary
+    # if st.sidebar.button("State Summary"):
+    #     ### token
+    #     try:
+    #         if len(state.myToken)>0:
+    #             st.sidebar.markdown("Got token")
+    #         else:
+    #             st.sidebar.markdown("No token found")
+    #     except AttributeError:
+    #         st.sidebar.markdown("No token defined")
+    #     ### component IDs
+    #     try:
+    #         st.sidebar.markdown("Component IDs defined: "+str(len(state.ids)))
+    #     except AttributeError:
+    #         st.sidebar.markdown("No components defined")
 
     ### debug toggle
     st.sidebar.markdown("---")
