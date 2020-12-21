@@ -24,6 +24,11 @@ def main_part(state):
     st.write(" --- ")
     ###
 
+    st.write("Select page from lefthand side menu")
+    st.write("  * Top Page (here)")
+    st.write("  * Choose Recipe: Select recipe set, type and recipe")
+    st.write("  * Broom Cupboard: Boring debugging stuff")
+
     state.cwd=cwd
 
     if state.debug:
