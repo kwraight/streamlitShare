@@ -5,6 +5,7 @@ from streamlit.hashing import _CodeHasher
 from streamlit.server.server import Server
 ###
 import base64
+import numpy as np
 
 ################
 ### Useful functions
