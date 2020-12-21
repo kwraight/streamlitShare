@@ -10,7 +10,10 @@ import stInfrastructure as infra
 ### pages
 import page_top
 import page_choose
+#import page_conv
+#import page_add
 import page_debug
+
 
 #####################
 ### main
@@ -24,6 +27,7 @@ def main():
     pages = {
         "Top Page": page_top.main_part,
         "Choose Recipe": page_choose.main_part,
+        # "Conversions": page_conv.main_part,
         # "Add Recipe": page_add.main_part,
         "Broom cupboard": page_debug.main_part,
     }

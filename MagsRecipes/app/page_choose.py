@@ -56,7 +56,6 @@ def GetIngDict(inStr):
 def main_part(state):
     st.title(":microscope: Select Recipe")
     st.write("---")
-    st.write("## Choose your dish")
     if state.debug:
         st.write("  * select recipe set")
         st.write("  * filter type of dish (if preferred)")
@@ -64,7 +63,7 @@ def main_part(state):
         st.write("  * select from list")
         st.write("  * display recipe")
     else:
-        st.write(" * toggle debug for details")
+        st.write(" * toggle debug (LHS) for details")
     st.write("---")
     ###
 
@@ -73,10 +72,15 @@ def main_part(state):
         st.write("### Debug is on")
 
     ## select from list
+    st.write("## Select recipe set")
     sel_name=st.selectbox("Choose a recipe set", ["Mags","Kenny"])
 
+    ## filter recipe type: sweet, savoury
+    st.write("## Select type of recipes")
     sel_filt=infra.selectbox_with_default("filter by type",["sweet","savoury"],"Any type")
+
     ## get list of recipes and display
+    st.write("## List of available recipes")
     recipeFiles=[]
     myDir="MagsRecipes/recipes/"+sel_name
     for file in os.listdir(myDir):
@@ -95,11 +99,13 @@ def main_part(state):
     infra.DisplayWithOption(df_list[['name','type']],"1")
 
     ## select from list
+    st.write("## Select recipe")
     sel_rec=st.selectbox("Choose a recipe", list(df_list.values), format_func=lambda x: x[0])
 
     # ## display recipe: ingredients section and method section
     repDict= GetRepiceDict(myDir+"/"+sel_rec[1])
     if state.debug: st.write(repDict)
+    st.write("## Recipe details")
     st.write("### Recipe for **",repDict['title'],"** by *",repDict['author'],"*")
     try:
         st.write("serves:",repDict['serves'])
