@@ -3,6 +3,7 @@ import stInfrastructure as infra
 ### data manipulation
 import pandas as pd
 import json
+from measurement.measures import Weight, Volume
 ### general
 import os
 import sys
@@ -11,6 +12,23 @@ import re
 #####################
 ### Next page
 #####################
+
+def GetScaleConv(inVal,inUnit,outUnit):
+    if inUnit.lower()==outUnit.lower():
+        return inVal, inUnit
+    val=None
+    if inUnit=="kg": val=Weight(kg=inVal)
+    elif inUnit=="lb": val=Weight(lb=inVal)
+    elif inUnit=="g": val=Weight(g=inVal)
+    elif inUnit=="oz": val=Weight(oz=inVal)
+    else: return inVal, inUnit
+    try:
+        if outUnit=="metric": return val.g, "g"
+        elif outUnit=="imperial": return val.oz, "oz"
+        else: return None, None
+    except AttributeError:
+        return None, None
+
 
 def GetName(inStr):
     # split by capitals
@@ -70,6 +88,8 @@ def main_part(state):
     # debug check
     if state.debug:
         st.error("Debug is on")
+    ## decimal places
+    pd.options.display.float_format = "{:,.2f}".format
 
     ## select from list
     st.write("## Select recipe set")
@@ -119,7 +139,32 @@ def main_part(state):
         st.write("none")
     st.write("### ingredients")
     df_ing=pd.DataFrame([GetIngDict(x) for x in repDict['ingredients']])
-    infra.DisplayWithOption(df_ing,"2")
+    def ScaleMap(inStr):
+        if inStr.lower() in ["kg", "g", "l", "ml"]:
+            return "metric"
+        elif inStr.lower() in ["lb", "oz", "fl.oz", "pint"]:
+            return "imperial"
+        else: return "other"
+    # original input
+    if state.debug:
+        st.write("original input:")
+        st.dataframe(df_ing)
+
+    # scaling
+    df_ing['scale']=df_ing['unit'].apply(lambda x: ScaleMap(x)  )
+    df_ing['amount']=df_ing['amount'].astype(float, errors="ignore")
+    if state.scale=="imperial":
+        #st.write(df_ing.query("scale=='metric'"))
+        df_ing['scaleAmount'],df_ing['scaleUnit']=zip( *df_ing.apply(lambda x: GetScaleConv(x['amount'], x['unit'], state.scale), axis=1) )
+    elif state.scale=="metric":
+        #st.write(df_ing.query("scale=='imperial'"))
+        df_ing['scaleAmount'],df_ing['scaleUnit']=zip( *df_ing.apply(lambda x: GetScaleConv(x['amount'], x['unit'], state.scale), axis=1) )
+        #st.write(df_ing.query("scale=='imperial'"))
+    else:
+        if state.debug: st.write("no conversion necessary")
+
+    # display scaled values
+    infra.DisplayWithOption(df_ing[["name","scaleAmount","scaleUnit"]],"2")
     st.write("### method")
     for c,m in enumerate(repDict['method'],1):
         st.write(str(c)+". "+m)

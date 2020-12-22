@@ -24,7 +24,7 @@ def main_part(state):
     st.write(" --- ")
     ###
 
-    st.write("Select page from lefthand side menu")
+    st.write("### Select page from lefthand side bar")
     st.write("  * Top Page(here): select measurement scale")
     st.write("  * Choose Recipe: Select recipe set, type and recipe")
     st.write("  * Broom Cupboard: Boring debugging stuff")
@@ -35,13 +35,5 @@ def main_part(state):
         st.write("Current directory:",cwd)
         st.write(os.listdir())
 
-
-    ## select from list
-    st.write("## Select measurement scale")
-    state.scale=st.selectbox("Choose a scale", ["metric","imperial"])
-    if state.scale=="metric":
-        st.write("Vive la republic!")
-    elif state.scale=="imperial":
-        st.write("Old school!")
-    else:
-        st.write("Awaiting a weighting")
+    ##
+    st.write("### Select scale from sidebar")
