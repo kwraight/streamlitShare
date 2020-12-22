@@ -14,8 +14,19 @@ def display_state_values(state):
     st.write("---")
 
 
-    ### csv dataframe
-
+    ## scale
+    st.write("## Measurement scale")
+    try:
+        if state.scale=="metric":
+            st.write("*Metric* is selected.")
+            st.write("Vive la republic!")
+        elif state.scale=="imperial":
+            st.write("*Imperial* is selected.")
+            st.write("Old school!")
+        else:
+            st.write("Awaiting a weighting")
+    except AttributeError:
+        st.write("Awaiting a weighting")
 
 ### get API response from endpoint
 def GetResponse(endStr):
@@ -49,8 +60,8 @@ def main_part(state):
 
     display_state_values(state)
 
-    st.write("## :exclamation: Clear all state settings")
-    if st.button("Clear state"):
-        state.clear()
+    # st.write("## :exclamation: Clear all state settings")
+    # if st.button("Clear state"):
+    #     state.clear()
 
     EasterEgg(state)
