@@ -6,6 +6,7 @@ from streamlit.server.server import Server
 ###
 import base64
 import numpy as np
+import pandas as pd
 
 ################
 ### Useful functions
@@ -30,6 +31,8 @@ def get_table_download_link(df):
 
 ### show df with option to download
 def DisplayWithOption(df,myKey="123"):
+    ## decimal places
+    pd.options.display.float_format = "{:,.2f}".format
     st.dataframe(df)
     if st.button("download table",key=myKey):
         st.markdown(get_table_download_link(df), unsafe_allow_html=True)
