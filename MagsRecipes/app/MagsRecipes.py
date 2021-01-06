@@ -50,9 +50,9 @@ def GetConvVolume():
 
 def GetConv(inVal,inUnit,outUnit):
     val=None
-    if inUnit in list(Weight.UNITS.keys()) and outUnit in list(Weight.UNITS.keys()):
+    if inUnit in ["kg","lb","g","oz"] and outUnit in ["kg","lb","g","oz"]:
         return GetConvWeight(inVal,inUnit,outUnit)
-    elif inUnit in list(Volume.UNITS.keys()) and outUnit in list(Volume.UNITS.keys()):
+    elif inUnit in ["pint","floz","l","ml"] and outUnit in ["pint","floz","l","ml"]:
         return GetConvVolume(inVal,inUnit,outUnit)
     else: return "Conversion mismatch issue: check units of the same type (Weight, Volume)"
 
@@ -85,8 +85,8 @@ def main():
     try:
         if state.miniCon:
             st.sidebar.markdown("### mini converter")
-            inUnit=st.sidebar.selectbox("from unit", ["kg","lb","oz","g"])
-            outUnit=st.sidebar.selectbox("to unit", ["kg","lb","oz","g"])
+            inUnit=st.sidebar.selectbox("from unit", ["kg","lb","oz","g"]+["pint","floz","l","ml"])
+            outUnit=st.sidebar.selectbox("to unit", ["kg","lb","oz","g"]+["pint","floz","l","ml"])
             inVal=st.sidebar.number_input('amount', value=1.)
             st.sidebar.markdown("Conversion:")
             outVal=GetConv(inVal, inUnit, outUnit)
