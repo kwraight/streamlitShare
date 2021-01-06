@@ -32,7 +32,7 @@ def GetConvWeight(inVal,inUnit,outUnit):
     elif outUnit=="lb": return val.lb
     elif outUnit=="g": return val.g
     elif outUnit=="oz": return val.oz
-    else: return None
+    else: return "Weight conversion issue: check units"
 
 def GetConvVolume():
     val=None
@@ -45,16 +45,16 @@ def GetConvVolume():
     elif outUnit=="floz": return val.lb
     elif outUnit=="l": return val.l
     elif outUnit=="ml": return val.l*1000
-    else: return None
+    else: return "Volume conversion issue: check units"
 
 
 def GetConv(inVal,inUnit,outUnit):
     val=None
-    if inUnit in list(Weight.UNITS.keys()):
+    if inUnit in list(Weight.UNITS.keys()) and outUnit in list(Weight.UNITS.keys()):
         return GetConvWeight(inVal,inUnit,outUnit)
-    elif inUnit in list(Volume.UNITS.keys()):
+    elif inUnit in list(Volume.UNITS.keys()) and outUnit in list(Volume.UNITS.keys()):
         return GetConvVolume(inVal,inUnit,outUnit)
-    else: return None
+    else: return "Conversion mismatch issue: check units of the same type (Weight, Volume)"
 
 
 def main():
@@ -88,9 +88,12 @@ def main():
             inUnit=st.sidebar.selectbox("from unit", ["kg","lb","oz","g"])
             outUnit=st.sidebar.selectbox("to unit", ["kg","lb","oz","g"])
             inVal=st.sidebar.number_input('amount', value=1.)
-            outVal=GetConv(inVal, inUnit, outUnit)
             st.sidebar.markdown("Conversion:")
-            st.sidebar.markdown(str(inVal)+" *"+inUnit+"*"+"  -->  "+str(outVal)+" *"+outUnit+"*")
+            outVal=GetConv(inVal, inUnit, outUnit)
+            if "issue" in outVal:
+                st.sidebar.markdown(outVal)
+            else:
+                st.sidebar.markdown(str(inVal)+" *"+inUnit+"*"+"  -->  "+str(outVal)+" *"+outUnit+"*")
     except:
         pass
 
