@@ -90,6 +90,7 @@ def main():
             inVal=st.sidebar.number_input('amount', value=1.)
             st.sidebar.markdown("Conversion:")
             outVal=GetConv(inVal, inUnit, outUnit)
+            if state.debug: st.sidebar.markdown(outVal)
             if "issue" in outVal:
                 st.sidebar.markdown(outVal)
             else:
