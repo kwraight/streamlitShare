@@ -21,7 +21,7 @@ import page_debug
 ### main
 #####################
 
-def GetConv(inVal,inUnit,outUnit):
+def GetConvWeight(inVal,inUnit,outUnit):
     val=None
     if inUnit=="kg": val=Weight(kg=inVal)
     elif inUnit=="lb": val=Weight(lb=inVal)
@@ -32,6 +32,28 @@ def GetConv(inVal,inUnit,outUnit):
     elif outUnit=="lb": return val.lb
     elif outUnit=="g": return val.g
     elif outUnit=="oz": return val.oz
+    else: return None
+
+def GetConvVolume():
+    val=None
+    if inUnit=="pint": val=Volume(imperial_pint=inVal)
+    elif inUnit=="floz": val=Volume(imperial_oz=inVal)
+    elif inUnit=="l": val=Volume(l=inVal)
+    elif inUnit=="ml": val=Volume(l=inVal*0.001)
+    else: val=None
+    if outUnit=="pint": return val.imperial_pint
+    elif outUnit=="floz": return val.lb
+    elif outUnit=="l": return val.l
+    elif outUnit=="ml": return val.l*1000
+    else: return None
+
+
+def GetConv(inVal,inUnit,outUnit):
+    val=None
+    if inUnit in list(Weight.UNITS.keys()):
+        return GetConvWeight(inVal,inUnit,outUnit)
+    elif inUnit in list(Volume.UNITS.keys()):
+        return GetConvVolume(inVal,inUnit,outUnit)
     else: return None
 
 
