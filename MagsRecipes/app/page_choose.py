@@ -60,7 +60,7 @@ def GetScaleConv(inVal,inUnit,outUnit):
             else: return None, None
         elif inUnit in ["pint","floz","l","ml"]:
             if outUnit=="metric": return val.ml, "ml"
-            elif outUnit=="imperial": return val.imperial_oz, "floz"
+            elif outUnit=="imperial": return val.imperial_pint, "pint"
             else: return None, None
         else: return None, None
     except AttributeError:
