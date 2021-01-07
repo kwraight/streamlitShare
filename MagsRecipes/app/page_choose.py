@@ -13,6 +13,33 @@ import re
 ### Next page
 #####################
 
+def GetConvWeight(inVal,inUnit,outUnit):
+    val=None
+    if inUnit=="kg": val=Weight(kg=inVal)
+    elif inUnit=="lb": val=Weight(lb=inVal)
+    elif inUnit=="g": val=Weight(g=inVal)
+    elif inUnit=="oz": val=Weight(oz=inVal)
+    else: return "Weight conversion issue: check in units"
+    if outUnit=="kg": return val.kg
+    elif outUnit=="lb": return val.lb
+    elif outUnit=="g": return val.g
+    elif outUnit=="oz": return val.oz
+    else: return "Weight conversion issue: check out units"
+
+def GetConvVolume(inVal,inUnit,outUnit):
+    val=None
+    if inUnit=="pint": val=Volume(imperial_pint=inVal)
+    elif inUnit=="floz": val=Volume(imperial_oz=inVal)
+    elif inUnit=="l": val=Volume(l=inVal)
+    elif inUnit=="ml": val=Volume(l=inVal*0.001)
+    else: return "Volume conversion issue: check in units"
+    if outUnit=="pint": return val.imperial_pint
+    elif outUnit=="floz": return val.imperial_oz
+    elif outUnit=="l": return val.l
+    elif outUnit=="ml": return val.l*1000
+    else: return "Volume conversion issue: check out units"
+
+
 def GetScaleConv(inVal,inUnit,outUnit):
     if inUnit.lower()==outUnit.lower():
         return inVal, inUnit
@@ -21,10 +48,20 @@ def GetScaleConv(inVal,inUnit,outUnit):
     elif inUnit=="lb": val=Weight(lb=inVal)
     elif inUnit=="g": val=Weight(g=inVal)
     elif inUnit=="oz": val=Weight(oz=inVal)
+    elif inUnit=="pint": val=Volume(imperial_pint=inVal)
+    elif inUnit=="floz": val=Volume(imperial_oz=inVal)
+    elif inUnit=="l": val=Volume(l=inVal)
+    elif inUnit=="ml": val=Volume(l=inVal*0.001)
     else: return inVal, inUnit
     try:
-        if outUnit=="metric": return val.g, "g"
-        elif outUnit=="imperial": return val.oz, "oz"
+        if inUnit in ["kg","lb","g","oz"]:
+            if outUnit=="metric": return val.g, "g"
+            elif outUnit=="imperial": return val.oz, "oz"
+            else: return None, None
+        elif inUnit in ["pint","floz","l","ml"]:
+            if outUnit=="metric": return val.ml, "ml"
+            elif outUnit=="imperial": return val.floz, "floz"
+            else: return None, None
         else: return None, None
     except AttributeError:
         return None, None
