@@ -91,8 +91,7 @@ def main():
             st.sidebar.markdown("Conversion:")
             outVal=GetConv(inVal, inUnit, outUnit)
             convStr=str(inVal)+" *"+inUnit+"*"+"  -->  "+str(outVal)+" *"+outUnit+"*"
-            if "issue" in outVal:
-                convStr=outVal
+            #if "issue" in outVal: convStr=outVal
             st.sidebar.markdown(convStr)
     except:
         pass
