@@ -34,7 +34,7 @@ def GetConvWeight(inVal,inUnit,outUnit):
     elif outUnit=="oz": return val.oz
     else: return "Weight conversion issue: check out units"
 
-def GetConvVolume():
+def GetConvVolume(inVal,inUnit,outUnit):
     val=None
     if inUnit=="pint": val=Volume(imperial_pint=inVal)
     elif inUnit=="floz": val=Volume(imperial_oz=inVal)
@@ -91,7 +91,7 @@ def main():
             st.sidebar.markdown("Conversion:")
             outVal=GetConv(inVal, inUnit, outUnit)
             convStr=str(inVal)+" *"+inUnit+"*"+"  -->  "+str(outVal)+" *"+outUnit+"*"
-            #if "issue" in outVal: convStr=outVal
+            if "issue" in outVal: convStr=outVal
             st.sidebar.markdown(convStr)
     except:
         pass
