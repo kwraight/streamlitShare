@@ -27,12 +27,12 @@ def GetConvWeight(inVal,inUnit,outUnit):
     elif inUnit=="lb": val=Weight(lb=inVal)
     elif inUnit=="g": val=Weight(g=inVal)
     elif inUnit=="oz": val=Weight(oz=inVal)
-    else: val=None
+    else: return "Weight conversion issue: check in units"
     if outUnit=="kg": return val.kg
     elif outUnit=="lb": return val.lb
     elif outUnit=="g": return val.g
     elif outUnit=="oz": return val.oz
-    else: return "Weight conversion issue: check units"
+    else: return "Weight conversion issue: check out units"
 
 def GetConvVolume():
     val=None
@@ -40,12 +40,12 @@ def GetConvVolume():
     elif inUnit=="floz": val=Volume(imperial_oz=inVal)
     elif inUnit=="l": val=Volume(l=inVal)
     elif inUnit=="ml": val=Volume(l=inVal*0.001)
-    else: val=None
+    else: "Volume conversion issue: check in units"
     if outUnit=="pint": return val.imperial_pint
     elif outUnit=="floz": return val.lb
     elif outUnit=="l": return val.l
     elif outUnit=="ml": return val.l*1000
-    else: return "Volume conversion issue: check units"
+    else: return "Volume conversion issue: check out units"
 
 
 def GetConv(inVal,inUnit,outUnit):
