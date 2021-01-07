@@ -90,10 +90,10 @@ def main():
             inVal=st.sidebar.number_input('amount', value=1.)
             st.sidebar.markdown("Conversion:")
             outVal=GetConv(inVal, inUnit, outUnit)
-            if "issue" not in outVal:
-                st.sidebar.markdown(outVal)
-            else:
-                st.sidebar.markdown(str(inVal)+" *"+inUnit+"*"+"  -->  "+str(outVal)+" *"+outUnit+"*")
+            convStr=str(inVal)+" *"+inUnit+"*"+"  -->  "+str(outVal)+" *"+outUnit+"*"
+            if "issue" in outVal:
+                convStr=outVal
+            st.sidebar.markdown(convStr)
     except:
         pass
 
