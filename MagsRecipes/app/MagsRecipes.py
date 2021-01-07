@@ -42,7 +42,7 @@ def GetConvVolume(inVal,inUnit,outUnit):
     elif inUnit=="ml": val=Volume(l=inVal*0.001)
     else: return "Volume conversion issue: check in units"
     if outUnit=="pint": return val.imperial_pint
-    elif outUnit=="floz": return val.lb
+    elif outUnit=="floz": return val.imperial_oz
     elif outUnit=="l": return val.l
     elif outUnit=="ml": return val.l*1000
     else: return "Volume conversion issue: check out units"
