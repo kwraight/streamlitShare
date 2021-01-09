@@ -36,11 +36,11 @@ def main_part(state):
         ## plotting
         ### collect pixel info.
         pix_xs = [p for p in range(0,len(results['pix_data'][0]),1)]
-        pix_deps = results['pix_data'][0]
+        pix_deps = [x for x in results['pix_data'][0]]
         pix_idxs = [0 for p in range(0,len(results['pix_data'][0]),1)]
         for i in range(1,results['settings']['numPix'],1):
             pix_xs.extend([p for p in range(0,len(results['pix_data'][i]),1)])
-            pix_deps.extend(results['pix_data'][i])
+            pix_deps.extend([x for x in results['pix_data'][i]])
             pix_idxs.extend([i for p in range(0,len(results['pix_data'][i]),1)])
 
         ### put info. in dataframe
