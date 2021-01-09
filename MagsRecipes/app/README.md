@@ -1,4 +1,4 @@
-# Mags' Recipes
+# Mags's Recipes
 
 ### [Streamlit](https://www.streamlit.io) (python**3**) code to store classic scran
 
@@ -15,10 +15,6 @@ Get libraries:
 
 Run WebApp:
 > streamlit run MagsRecipes.py
-
-[*Docker version*]():
-Run WebApp (TBC):
-> docker run -p 8501:8501 kwraight/streamlit_mags_recipes:TAG_ID streamlit run code/MagsRecipes.py
 
 ---
 
@@ -43,4 +39,4 @@ Run WebApp (TBC):
 
 ## TODO
   * content: add Recipes
-  * refactor: convert *.py to *json on the fly in app, rather than write json files
+  * make page for adding recipe
