@@ -1,6 +1,7 @@
 ### streamlit stuff
 import streamlit as st
 ### general stuff
+import datetime
 import os
 import sys
 ###session stuff
@@ -24,6 +25,11 @@ import page_debug
 ### main
 #####################
 
+### format datetime
+def DateFormat(dt):
+    return str("{0:02}-{1:02}-{2:04}".format(dt.day,dt.month,dt.year))+" at "+str("{0:02}:{1:02}".format(dt.hour,dt.minute))
+
+
 def RunSimulation(state):
     settings={'numPix':state.numPix,'chargeSharing':state.chargeSharing,'beamWidth':state.beamWidth,'chipMode':state.chipMode,'threshold':state.threshold}
     simResults=[]
@@ -33,7 +39,7 @@ def RunSimulation(state):
         state.simResults.append({'name':state.name,'pix_data':simResults,'settings':settings})
     except AttributeError:
         state.simResults=[{'name':state.name,'pix_data':simResults,'settings':settings}]
-    return "Simulation complete"
+    return "Simulation complete: "+DateFormat(datetime.datetime.now())
 
 
 def main():
