@@ -31,6 +31,9 @@ from random import randint
 #####################
 
 def main_part(state):
+    ### get page name
+    pageName=__file__.split('_')[-1].replace('.py','')
+    ### title and (optional) instructions
     st.title(":globe_with_meridians: test page")
     st.write("## Kené's pages")
     st.write("---")
@@ -45,11 +48,20 @@ def main_part(state):
         st.write("---")
     ###
 
-    # check page info. defined
-    if "test" in [i for i in state.__dict__.keys() if i[:1] != '_']:
-        if state.debug: st.write("state.test defined")
+    # debug check
+    if state.debug:
+        st.write("### Debug is on")
+
+    ### add page attrubute to state
+    # st.write([i for i in state.__dict__.keys() if i[:1] != '_'])
+    if pageName in [i for i in state.__dict__.keys() if i[:1] != '_']:
+        if state.debug: st.write("state."+pageName+" defined")
     else:
-        state.test={}
+        state.__setattr__(pageName,{})
+    # st.write([i for i in state.__dict__.keys() if i[:1] != '_'])
+
+    ### getting attribute
+    pageDict=state.__getattribute__(pageName)
 
     data=[]
     # seed random number generator

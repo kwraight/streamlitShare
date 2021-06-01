@@ -24,6 +24,9 @@ import stInfrastructure as infra
 #####################
 
 def main_part(state):
+    ### get page name
+    pageName=__file__.split('_')[-1].replace('.py','')
+    ### title and (optional) instructions
     st.title(":globe_with_meridians: Welcome page")
     st.write("## Kené's pages")
     st.write("---")
@@ -38,10 +41,19 @@ def main_part(state):
         st.write("---")
     ###
 
-    # check page info. defined
-    if "overview" in [i for i in state.__dict__.keys() if i[:1] != '_']:
-        if state.debug: st.write("state.overview defined")
-    else:
-        state.overview={}
+    # debug check
+    if state.debug:
+        st.write("### Debug is on")
 
-    st.write("## Hello from STS")
+    ### add page attrubute to state
+    # st.write([i for i in state.__dict__.keys() if i[:1] != '_'])
+    if pageName in [i for i in state.__dict__.keys() if i[:1] != '_']:
+        if state.debug: st.write("state."+pageName+" defined")
+    else:
+        state.__setattr__(pageName,{})
+    # st.write([i for i in state.__dict__.keys() if i[:1] != '_'])
+
+    ### getting attribute
+    pageDict=state.__getattribute__(pageName)
+
+    st.write("## Hello from other")

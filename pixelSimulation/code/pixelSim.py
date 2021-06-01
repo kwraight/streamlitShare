@@ -1,4 +1,4 @@
-### simple pixel simulation
+### simple pixel charge deposition simulation
 import numpy as np
 import math
 import random
