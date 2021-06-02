@@ -17,7 +17,6 @@ import importlib
 ## standard pages
 stdDir=cwd+"/pages"
 stdFiles= sorted([f for f in os.listdir(stdDir) if os.path.isfile(os.path.join(stdDir, f)) and "page_" in f and not f.endswith("~")])
-print(stdFiles)
 sys.path.insert(1, stdDir)
 stdModules= [importlib.import_module(p[:-3]) for p in stdFiles]
 ## content pages
