@@ -1,0 +1,35 @@
+Name,Size (km),Type,Laboratory,Construction,Begin,End,Comment 
+DESY,0.2928 C,SR,Desy,1960,1962.0,1978,"DEustche Synchotron, electron synchrotron, injector for Doris and Petra after 1978"
+DESY II,0.2928 C,SR,Desy,nan,1987.0,nan,"electron synchrotron, pre-accelerator for HERA"
+DESY III,0.2928 C,SR,Desy,nan,1988.0,nan,"Proton synchrotron, pre-accelerator for HERA"
+DORIS,0.289 C,SR,Desy,1968,1974.0,1992,"Doppel-RIng-Speicher: ""double-ring storage"""
+DORIS II,0.289 C,SR,Desy,--,1982.0,1992,nan
+DORIS III,0.289 C,SR,Desy,nan,1993.0,2012,Photon science
+PETRA,2.304 C,SR,Desy,1975,1978.0,1986,"Positron-Elektron-Tandem-Ring-Anlage, ""positron-electron tandem-ring facility"", JADE replaced PLUTO, injector for HERA 1986-2007"
+PETRA II,2.304 C,SR,Desy,nan,1990.0,nan,Pre-accelerator for HERA
+PETRA III,2.304 C,SR,Desy,2007,2009.0,--,HASYLAB synchrotron radiation
+HERA,6.336 C,SR,Desy,1984,1991.0,2007,"Hadron-Elektron-Ring-Anlage, ""Hadron Electron Ring Facility"". Collide protons with either electrons or positrons"
+VUV-FEL,nan,nan,Desy,1995,2000.0,2004,nan
+FLASH,nan,nan,Desy,--,2004.0,--,nan
+XFEL,nan,nan,Desy,2009,2012.0,--,nan
+PS,0.628 C,SR,Cern,nan,1959.0,--,Proton Synchrotron
+ISR,6.9 C,SR,Cern,nan,1971.0,1984,Intersecting Storage Rings. World's first hadron collider
+SPS,6.9 C,SR,Cern,nan,1976.0,--,Super Proton Synchrotron (1981-1991)
+LEP,27 C,SR,Cern,nan,1989.0,2000,Large Electron-Positron collider
+LHC,27 C,SR,Cern,nan,2010.0,--,Large Hadron collider
+RHIC,3.834 C,SR,BNL,nan,2000.0,--,Relativistic Heavy Ion Collider
+Tevatron,6.28 C,SR,FermiLab,nan,1983.0,2011,nan
+Linac,nan,Linac,SLAC,1962,1966.0,1974,After 1974 served as injector
+SPEAR,0.080 D,SR,SLAC,1970,1972.0,1990,Stanford Positron Electron Asymmetric Rings
+SPEAR2,0.080 D,SR,SLAC,--,1990.0,2001,Synchrotron radiation repurpose (SSRL)
+SPEAR3,0.080 D,SR,SLAC,2001,2003.0,2012,2004 refurbish
+SLC,3.2 C,Linac,SLAC,1983,1989.0,1998,SLAC Linear Collider
+PEP,2.2 C,SR,SLAC,1976,1980.0,1994,Positron-Electron Project
+PEP-II,2.2 C,SR,SLAC,1994,1998.0,2008,Positron-Electron Project II
+LCLS,nan,LS,SLAC,2004,2009.0,--,nan
+CESR,0.768 C,SR,Cornell,nan,1979.0,nan,Cornell Electron-positron Storage Ring. Now X-ray source
+MIT-Bates Linac,nan,Linac,MIT-Bates,nan,nan,nan,nan
+AGS,0.257 D,nan,BNL,nan,1960.0,nan,"Alternating Gradient Synchrotron. Now, injector for RHIC"
+TRISTAN,nan,nan,KEK,nan,1984.0,1995,Transposable Ring Intersecting STorage Accelerator in Nippon. e+e- collider
+KEKB,3.016 C,SR,KEK,nan,1999.0,2010,"B-factory, e+e- collider"
+SuperKEKB,3.016 C,SR,KEK,nan,2018.0,nan,"B-factory, e+e- collider"

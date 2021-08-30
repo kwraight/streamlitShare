@@ -46,17 +46,6 @@ build *usual* image:
 
 > docker build . -f dockerFiles/Dockerfile -t big-app
 
-build *Cern usable* image (for use with openShift):
-
-> docker build . -f dockerFiles/DockerfileCern -t big-app
-
-An additional file is supplied to make use of additional content (based on *usual* template image).
-The procedure is as follows:
-
-* build *new* image (from ''pages'' parent directory)
-
-> docker build . -f dockerFiles/Dockerfile -t big-app
-
 The build will copy files in the pages directory into the image and use these as content of the webApp.
 
 * run container from image:
