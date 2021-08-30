@@ -1,13 +1,14 @@
 # base image
-FROM kwraight/template-app:cern
+FROM kwraight/multitemplate-app:cern
 
 # exposing default port for streamlit
 # EXPOSE 8501 # (already in base image)
 
 # copying new pages over
-COPY core/*.py ./core/
-RUN rm ./userPages/*
-COPY userPages/* ./userPages/
+#COPY core/*.py ./core/
+RUN rm -rf ./userPages/*
+COPY userPages/ ./userPages/
+COPY data/ ./data/
 COPY mainApp.py ./mainApp.py
 COPY requirements.txt ./requirements.txt
 USER root

@@ -17,12 +17,10 @@ from random import randint
 
 class Page3(Page):
     def __init__(self):
-        super().__init__("Page3", "Zeroth Page", ['nothing to report'])
+        super().__init__("Tests", "Some Scrappy Tests", ['nothing to report'])
 
     def main(self):
         pageDict=super().main()
-
-        #st.write("Content to be added xxx")
 
         data=[]
         # seed random number generator
