@@ -69,7 +69,7 @@ class Page2(Page):
         df_new['End']=df_new['End'].fillna(2020)
 
 
-        df_new['Begin'] = df_new['Begin'].astype('Int64')
+        df_new['Begin'] = df_new['Begin'].astype('float').astype('Int32') #.astype('Int64')
         df_new['Begin'].loc[df_new['Begin']=='nan']
         df_new.drop(df_new.loc[df_new['Begin']=="TBC"].index, inplace=True)
         df_new = df_new[df_new.Name != 'MIT-Bates Linac']

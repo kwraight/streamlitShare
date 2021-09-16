@@ -1,5 +1,7 @@
 from core.MultiApp import App
 
-myapp = App("bigApp", "Streamlit Multi Theme App")
+smalls={}
+
+myapp = App("bigApp", "Streamlit Multi Theme App",smalls)
 
 myapp.main()

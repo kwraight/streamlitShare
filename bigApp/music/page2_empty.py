@@ -1,6 +1,6 @@
 ### standard
 import streamlit as st
-from core.ThemePage import Page
+from core.Page import Page
 ### custom
 
 #####################

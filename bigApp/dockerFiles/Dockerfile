@@ -5,13 +5,11 @@ FROM kwraight/multitemplate-app:cern
 # EXPOSE 8501 # (already in base image)
 
 # copying new pages over
-#COPY core/*.py ./core/
-RUN rm -rf ./userPages/*
-COPY userPages/ ./userPages/
-COPY data/ ./data/
+USER root
+RUN rm -rf ./userPages/theme*
+COPY music/* ./userPages/music/
 COPY mainApp.py ./mainApp.py
 COPY requirements.txt ./requirements.txt
-USER root
 RUN pip3 install -r requirements.txt
 
 # # fudge for CERN image
