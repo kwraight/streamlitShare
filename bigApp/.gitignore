@@ -1,3 +1,4 @@
 
 *.pyc
 *buildAndPush*
+music/tunes/*
