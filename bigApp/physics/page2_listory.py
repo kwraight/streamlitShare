@@ -1,13 +1,14 @@
 ### standard
 import streamlit as st
-from core.ThemePage import Page
+from core.Page import Page
+### custom
+import core.stInfrastructure as infra
 ### this page
 import os
 import json
 import pandas as pd
 import plotly.express as px
 import altair as alt
-import core.stInfrastructure as infra
 
 #####################
 ### useful functions
@@ -31,23 +32,29 @@ class Page2(Page):
         super().__init__("Listory", "Timelines of HEP Technology", ['nothing to report'])
 
     def main(self):
-        pageDict=super().main()
+        super().main()
 
-        st.write("### Select data")
-        file_path = os.path.realpath(__file__)
-        data_path = "/".join(file_path.replace('userPages','data').split("/")[:-1])
-        data_path += "/listory"
-        st.write("data path:",data_path)
+        ### getting attribute
+        pageDict=st.session_state[self.name]
 
-        csvFiles = [f for f in os.listdir(data_path)] # if os.path.isfile(os.path.join(data_path, f))]
+        ### set data directory
+        #st.write(os.getcwd())
+        if 'dataDir' not in pageDict.keys():
+            pageDict['dataDir']="/code/userPages/physics/data/"
+        if st.session_state.debug:
+            infra.TextBox(pageDict,'dataDir','directory for data')
+        if pageDict['dataDir'][-1]!="/":
+            pageDict['dataDir']+="/"
+
+        csvFiles = [f for f in os.listdir(pageDict['dataDir'])] # if os.path.isfile(os.path.join(pageDict['dataDir'], f))]
 
         if st.session_state.debug:
             st.write("**DEBUG** csv files")
             st.write(csvFiles)
 
-        infra.SelectBox(pageDict,'csv',csvFiles,"Select data file:")
+        infra.Radio(pageDict,'csv',csvFiles,"Select data file:")
 
-        df_new=pd.read_csv(data_path+"/"+pageDict['csv'])
+        df_new=pd.read_csv(pageDict['dataDir']+"/"+pageDict['csv'])
 
         if st.session_state.debug:
             st.dataframe(df_new)
@@ -69,9 +76,9 @@ class Page2(Page):
         df_new['End']=df_new['End'].fillna(2020)
 
 
+        df_new.drop(df_new.loc[df_new['Begin']=="TBC"].index, inplace=True)
         df_new['Begin'] = df_new['Begin'].astype('float').astype('Int32') #.astype('Int64')
         df_new['Begin'].loc[df_new['Begin']=='nan']
-        df_new.drop(df_new.loc[df_new['Begin']=="TBC"].index, inplace=True)
         df_new = df_new[df_new.Name != 'MIT-Bates Linac']
 
         df_new['Lifetime']=df_new['End'].astype('int')-df_new['Begin'].astype('int')

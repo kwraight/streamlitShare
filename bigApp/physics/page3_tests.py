@@ -1,6 +1,8 @@
 ### standard
 import streamlit as st
-from core.ThemePage import Page
+from core.Page import Page
+### custom
+import core.stInfrastructure as infra
 ### this page
 import streamlit.components.v1 as components
 import json
