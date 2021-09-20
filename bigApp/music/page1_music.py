@@ -20,6 +20,8 @@ class Page1(Page):
         ### getting attribute
         pageDict=st.session_state[self.name]
 
+        ### pass code?
+
         ### set tune directory
         #st.write(os.getcwd())
         if 'tuneDir' not in pageDict.keys():
@@ -30,9 +32,13 @@ class Page1(Page):
             pageDict['tuneDir']+="/"
 
         st.write("checking:",pageDict['tuneDir'])
-        for file in os.listdir(pageDict['tuneDir']):
-            #st.write(os.path.join(pageDict['tuneDir'], file))
-            if file.endswith(".mp3"):
-                name=os.path.join(pageDict['tuneDir'], file)
-                st.write(name)
-                st.audio(name)
+        try:
+            for file in os.listdir(pageDict['tuneDir']):
+                #st.write(os.path.join(pageDict['tuneDir'], file))
+                if file.endswith(".mp3"):
+                    name=os.path.join(pageDict['tuneDir'], file)
+                    st.write(name)
+                    st.audio(name)
+        except FileNotFoundError:
+            st.write("no such thing")
+            st.stop()
