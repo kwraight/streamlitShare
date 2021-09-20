@@ -2,3 +2,5 @@
 *.pyc
 *buildAndPush*
 music/tunes/*
+physics/data/*
+STS/readings/*
