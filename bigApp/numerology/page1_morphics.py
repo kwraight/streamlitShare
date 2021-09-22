@@ -23,8 +23,7 @@ class Page1(Page):
 
         ### getting attribute
         pageDict=st.session_state[self.name]
-
-        ### pass code?
+        
 
         power=st.multiselect("Pick a power:",[x for x in range(1,10,1)])
         upto=st.radio("Pick range to check (up to):",[1000,10000,100000,1000000])
