@@ -1,4 +1,4 @@
-Name,Size (km),Type,Location,Construction,Begin,End,Comment 
+Name,Size (km),Type,Laboratory,Construction,Begin,End,Comment 
 DESY,0.2928 C,SR,Desy,1960,1962.0,1978,"DEustche Synchotron, electron synchrotron, injector for Doris and Petra after 1978"
 DESY II,0.2928 C,SR,Desy,nan,1987.0,nan,"electron synchrotron, pre-accelerator for HERA"
 DESY III,0.2928 C,SR,Desy,nan,1988.0,nan,"Proton synchrotron, pre-accelerator for HERA"

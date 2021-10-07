@@ -1,4 +1,4 @@
-Lab,Location,Begin,End,Current Use,Machines (circ.(km)/CoM(GeV)),Comment
+Name,Location,Begin,End,Current Use,Machines (circ.(km)/CoM(GeV)),Comment
 DESY,"Hamburg, Germany",1959,--,LS (PP),"DESY(0.3/-), PETRA(2.3/-), HERA (6.3/314)",
 CERN,"Geneva, Switzerland",1954,--,PP,"ISR(0.47/63), SPS(7/900), LHC (27/13000)",
 SLAC,"California, US",1962,--,LS (PP),"SPEAR(0.25/4), PEP(2.2/30)",
