@@ -39,7 +39,7 @@ instructions=["  * choose your name",
 
 class Page1(Page):
     def __init__(self):
-        super().__init__("Buitd It", "Build you submission here!", instructions)
+        super().__init__("Build It", ":raised_hands: Build you submission here!", instructions)
 
     def main(self):
         super().main()
@@ -100,4 +100,5 @@ class Page1(Page):
             #st.write("Please copy and send to Sandy when you're done")
             st.write(pageDict['subStr'])
             if st.button("Send to Sandy via whatsapp"):
-                st.write("## of course this doesn't work!")
+                st.write("## Of course this doesn't work!")
+                st.write("use the bloody doodle")
