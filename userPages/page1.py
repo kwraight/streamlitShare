@@ -19,7 +19,7 @@ import random
 #####################
 
 def GetInitials(name):
-    initMap={"Sandy":"SW","Hunter":"IH","McCall":"IM","Ritchie":"RT","Roscoe":"CR","Tony":"TB","Andy":"AS","Gerry":"GR","Kenny":"KW","Gilmour":"SG","Dima":"DM"}
+    initMap={"Sandy":"SW","Hunter":"IH","McCall":"IM","Ritchie":"RT","Roscoe":"CR","Tony":"TB","Andy":"AS","Gerry":"GR","Kenny":"KW","Gilmour":"SG","Dima":"DM","Williams":"IW"}
     return initMap[name]
 
 def GetDay(name):
@@ -49,7 +49,7 @@ class Page1(Page):
 
         st.write("### :question: Who?")
 
-        nameList=["Sandy","Hunter","McCall","Ritchie","Roscoe","Tony","Andy","Gerry","Kenny","Gilmour","Dima"]
+        nameList=["Sandy","Hunter","McCall","Ritchie","Roscoe","Tony","Andy","Gerry","Kenny","Gilmour","Dima","Williams"]
         dayList=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         ### set name
         infra.SelectBox(pageDict,'name',nameList,'Select your name:')
