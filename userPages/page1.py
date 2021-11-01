@@ -85,7 +85,7 @@ class Page1(Page):
         # add behalf info.
         thisSub+="["+GetInitials(pageDict['behalf'])+"."+GetDay(pageDict['behalfDay'])+"]"
         # add availablity
-        thisSub+="."+time[0].strftime("%H.%M")+"-"+time[1].strftime("%H.%M")+GetDay(pref)
+        thisSub+="."+time[0].strftime("%H.%M")+"-"+time[1].strftime("%H.%M")+"."+GetDay(pref)
         st.write(thisSub)
 
         if st.button("add this string"):
@@ -97,6 +97,7 @@ class Page1(Page):
         if len(pageDict['subStr'])<1:
             st.write("nothing added yet")
         else:
-            st.write("Please copy and send to Sandy")
+            #st.write("Please copy and send to Sandy when you're done")
             st.write(pageDict['subStr'])
-        #SW.WED[KGW.THURS].WED.03.11.FRI.17.12.19-20.THUR.20-00.THURS.WED
+            if st.button("Send to Sandy via whatsapp"):
+                st.write("## of course this doesn't work!")
