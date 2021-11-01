@@ -16,4 +16,5 @@ class Page0(Page):
 
         #pageDict=st.session_state[self.name]
 
-        st.write("Plots of some physics information")
+        st.write("By popular demand, here's a helpful app to build your Christmas schedule submission.")
+        st.write("Simply go to the _Build It_ page and make your dreams come true!")

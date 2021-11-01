@@ -10,19 +10,28 @@ import pandas as pd
 import plotly.express as px
 import altair as alt
 from st_aggrid import AgGrid
+import datetime
+
+import random
 
 #####################
 ### useful functions
 #####################
 
-def MapCol(csvName):
-    if "accel" in csvName:
-        return {'yTitle':"Accelerator",'legTitle':"Laboratory"}
-    elif  "exp" in csvName:
-        return {'yTitle':"Experiment",'legTitle':"Machine"}
-    elif "labo" in csvName:
-        return {'yTitle':"Laboratory",'legTitle':"Location"}
-    return None,None
+def GetInitials(name):
+    initMap={"Sandy":"SW","Hunter":"IH","McCall":"IM","Ritchie":"RT","Roscoe":"CR","Tony":"TB","Andy":"AS","Gerry":"GR","Kenny":"KW","Gilmour":"SG","Dima":"DM"}
+    return initMap[name]
+
+def GetDay(name):
+    initMap={"Monday":"MON","Tuesday":"TUE","Wednesday":"WED","Thursday":"THU","Friday":"FRI","Saturday":"SAT","Sunday":"SUN"}
+    return initMap[name]
+
+instructions=["  * choose your name",
+        "  * choose name of who you are submitting for",
+        "   * select date",
+        "   * select time range",
+        "  * add submission string to set",
+        "   * copy set and send to Sandy"]
 
 #####################
 ### main part
@@ -30,7 +39,7 @@ def MapCol(csvName):
 
 class Page1(Page):
     def __init__(self):
-        super().__init__("Listory", "Timelines of HEP Technology", ['nothing to report'])
+        super().__init__("Buitd It", "Build you submission here!", instructions)
 
     def main(self):
         super().main()
@@ -38,161 +47,56 @@ class Page1(Page):
         ### getting attribute
         pageDict=st.session_state[self.name]
 
-        ### set data directory
-        #st.write(os.getcwd())
-        if 'dataDir' not in pageDict.keys():
-            pageDict['dataDir']=os.getcwd()+"/data/"
-        if st.session_state.debug:
-            infra.TextBox(pageDict,'dataDir','directory for data')
-        if pageDict['dataDir'][-1]!="/":
-            pageDict['dataDir']+="/"
+        st.write("### :question: Who?")
 
-        csvFiles = [f for f in os.listdir(pageDict['dataDir'])] # if os.path.isfile(os.path.join(pageDict['dataDir'], f))]
+        nameList=["Sandy","Hunter","McCall","Ritchie","Roscoe","Tony","Andy","Gerry","Kenny","Gilmour","Dima"]
+        dayList=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
+        ### set name
+        infra.SelectBox(pageDict,'name',nameList,'Select your name:')
 
-        if st.session_state.debug:
-            st.write("**DEBUG** csv files")
-            st.write(csvFiles)
+        if pageDict['name']=="Dima":
+            st.write("bastard!")
 
-        infra.Radio(pageDict,'csv',csvFiles,"Select data file:")
+        if "nameDay" not in pageDict.keys():
+            pageDict['nameDay']=random.choice(dayList)
+        st.write("Your submission day this week is:",pageDict['nameDay'])
 
-        df_new=pd.read_csv(pageDict['dataDir']+"/"+pageDict['csv'])
+        behalfList=[x for x in nameList if x!=pageDict['name']]
+        infra.SelectBox(pageDict,'behalf',behalfList,'Select who you are submitting for:')
 
-        if st.session_state.debug:
-            st.dataframe(df_new)
+        if "behalfDay" not in pageDict.keys():
+            pageDict['behalfDay']=random.choice(dayList)
 
-        ### map column of interest to fileName
-        colName=MapCol(pageDict['csv'])
+        st.write(pageDict['behalf']+"\'s submission day this week is:",pageDict['behalfDay'])
 
-        df_new=df_new.rename(columns=lambda x: x.strip())
-        for c in list(df_new.columns):
-            try:
-                df_new[c]=df_new[c].str.strip()
-            except:
-                pass
+        st.write("### :date: When?")
 
-        df_new['End'] = df_new['End'].str.replace(' ', '')
-        df_new['End'] = df_new['End'].str.replace('\xa0', '')
-        df_new.loc[df_new['End']=="--",'End']="2020"
-        df_new.loc[df_new['End']=="",'End']="2020"
-        df_new['End']=df_new['End'].fillna(2020)
+        date = st.date_input('Available date:', datetime.date(2021,12,1))
+        time = st.slider("Available times:", value=(datetime.time(12, 00), datetime.time(23, 59)))
+        pref = st.selectbox('Preference level:',dayList)
 
 
-        df_new.drop(df_new.loc[df_new['Begin']=="TBC"].index, inplace=True)
-        df_new['Begin'] = df_new['Begin'].astype('float').astype('Int32') #.astype('Int64')
-        df_new['Begin'].loc[df_new['Begin']=='nan']
-        df_new = df_new[df_new.Name != 'MIT-Bates Linac']
+        st.write("### :construction: Build submission...")
 
-        df_new['Lifetime']=df_new['End'].astype('int')-df_new['Begin'].astype('int')
+        if "subStr" not in pageDict.keys():
+            pageDict['subStr']=[]
+        # add submitter info.
+        thisSub=GetInitials(pageDict['name'])+"."+GetDay(pageDict['nameDay'])
+        # add behalf info.
+        thisSub+="["+GetInitials(pageDict['behalf'])+"."+GetDay(pageDict['behalfDay'])+"]"
+        # add availablity
+        thisSub+="."+time[0].strftime("%H.%M")+"-"+time[1].strftime("%H.%M")+GetDay(pref)
+        st.write(thisSub)
 
-        df_new=df_new.sort_values(by=['Begin'])
-        df_new['Begin']=pd.to_datetime(df_new['Begin'], format='%Y')
-        df_new['End']=pd.to_datetime(df_new['End'], format='%Y')
+        if st.button("add this string"):
+            st.balloons()
+            pageDict['subStr'].append(thisSub)
 
-        df_new.loc[df_new[colName['legTitle']]=="--",colName['legTitle']]="N/A"
-        df_new.loc[df_new[colName['legTitle']]=="",colName['legTitle']]="N/A"
-        df_new.loc[df_new[colName['legTitle']]==" ",colName['legTitle']]="N/A"
+        st.write("### :point_right: Full submistion")
 
-
-        df_new['Begin'] = df_new['Begin'].astype('datetime64')
-        df_new['End'] = df_new['End'].astype('datetime64')
-
-        AgGrid(df_new)
-        #st.dataframe(df_new)
-
-        orders = list(df_new[colName['legTitle']])
-        fig = px.timeline(df_new
-                          , x_start="Begin"
-                          , x_end="End"
-                          , y="Name"
-                          , hover_name=colName['legTitle']
-        #                   , facet_col="Dimension"
-        #                   , facet_col_wrap=40
-        #                   , facet_col_spacing=.99
-        #                   , color_discrete_sequence=['green']*len(df)
-                          , color_discrete_sequence=px.colors.qualitative.Prism
-                          , opacity=.7
-        #                   , text="Task"
-                          , range_x=None
-                          , range_y=None
-                          , template='plotly_white'
-                          , height=1200
-        #                   , width=1500
-                          , color=colName['legTitle']
-                          #, title ="<b>"+colName['legTitle']+"</b>"
-        #                   , color=colors
-                         )
-        fig.update_layout(
-            bargap=0.5
-            ,bargroupgap=0.1
-            ,xaxis_range=[df_new.Begin.min(), df_new.End.max()]
-            ,xaxis = dict(
-                showgrid=True
-                ,rangeslider_visible=True
-                ,side ="top"
-                ,tickmode = 'array'
-                ,dtick="M1"
-                ,tickformat="%Y \n"
-                ,ticklabelmode="period"
-                ,ticks="outside"
-                ,tickson="boundaries"
-                ,tickwidth=.1
-                ,layer='below traces'
-                ,ticklen=20
-                ,tickfont=dict(
-                    family='Old Standard TT, serif',size=24,color='gray')
-                ,rangeselector=dict(
-                    buttons=list([
-                        dict(count=1, label="1m", step="month", stepmode="backward"),
-                        dict(count=6, label="6m", step="month", stepmode="backward"),
-                        dict(count=1, label="YTD", step="year", stepmode="todate"),
-                        dict(count=1, label="1y", step="year", stepmode="backward"),
-                        dict(step="all")
-                    ])
-                    ,x=.37
-                    ,y=-.05
-                    ,font=dict(
-                        family="Arial",
-                        size=14,
-                        color="darkgray"
-            )))
-
-            ,yaxis = dict(
-                title= colName['yTitle']
-                ,autorange="reversed"
-                ,automargin=True
-        #         ,anchor="free"
-                ,ticklen=10
-                ,showgrid=True
-                ,showticklabels=True
-                ,tickfont=dict(
-                    family='Old Standard TT, serif', size=16, color='gray'))
-
-            ,legend=dict(
-                orientation="h"
-                ,yanchor="bottom"
-                ,y=1.1
-                ,title= colName['legTitle']
-                ,xanchor="right"
-                ,x=1
-                ,font=dict(
-                    family="Arial"
-                    ,size=14
-                    ,color="darkgray"))
-        )
-        fig.update_traces( #marker_color='rgb(158,202,225)'
-                           marker_line_color='rgb(8,48,107)'
-                          , marker_line_width=1.5, opacity=0.95)
-        fig.update_layout(
-            #title="<b>"+colName['legTitle']+"</b>",
-            xaxis_title="",
-        #     margin_l=400,
-            yaxis_title=colName['yTitle'],
-        #     legend_title="Dimension: ",
-            font=dict(
-                family="Arial",
-                size=24,
-                color="darkgray"
-            )
-        )
-        # fig.show()
-        st.plotly_chart(fig)
+        if len(pageDict['subStr'])<1:
+            st.write("nothing added yet")
+        else:
+            st.write("Please copy and send to Sandy")
+            st.write(pageDict['subStr'])
+        #SW.WED[KGW.THURS].WED.03.11.FRI.17.12.19-20.THUR.20-00.THURS.WED
