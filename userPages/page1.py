@@ -88,7 +88,7 @@ class Page1(Page):
         thisSub+="."+time[0].strftime("%H.%M")+"-"+time[1].strftime("%H.%M")+"."+GetDay(pref)
         st.write(thisSub)
 
-        if st.button("add this string"):
+        if st.button("add this info."):
             st.balloons()
             pageDict['subStr'].append(thisSub)
 
@@ -98,7 +98,8 @@ class Page1(Page):
             st.write("nothing added yet")
         else:
             #st.write("Please copy and send to Sandy when you're done")
-            st.write(pageDict['subStr'])
+            for ss in pageDict['subStr']:
+                st.write(ss)
             if st.button("Send to Sandy via whatsapp"):
                 st.write("## Of course this doesn't work!")
                 st.write("use the bloody doodle")
