@@ -19,18 +19,18 @@ import random
 #####################
 
 thePeople={
-"Sandy":{'init':"SW",'bants':"Your name is Alexander Hamilton!"},
-"Hunter":{'init':"IH",'bants':"Staunch!"},
-"McCall":{'init':"IM",'bants':"True Dat."},
-"Ritchie":{'init':"RT",'bants':"Ritchie T, he tell _no_ lies."},
-"Roscoe":{'init':"CR",'bants':""},
-"Tony":{'init':"TB",'bants':"Salve Centurion!"},
-"Andy":{'init':"AS",'bants':"Poet-Philosopher and alround good guy."},
-"Gerry":{'init':"GC",'bants':""},
-"Kenny":{'init':"KW",'bants':"It's me!"},
-"Gilmour":{'init':"SG",'bants':"'Mon the Well!'"},
-"Dima":{'init':"DM",'bants':"Bastard!"},
-"Williams":{'init':"IW",'bants':"Smartie's in the house!"},
+"Sandy":{'init':"SW",'bants':":notes: Your name is _Alexander Hamilton_!"},
+"Hunter":{'init':"IH",'bants':":muscle: Staunch!"},
+"McCall":{'init':"IM",'bants':":guitar: True Dat."},
+"Ritchie":{'init':"RT",'bants':":beers: Ritchie T - he tell _no_ lies."},
+"Roscoe":{'init':"CR",'bants':":football:"},
+"Tony":{'init':"TB",'bants':":hand: Salve Centurion!"},
+"Andy":{'init':"AS",'bants':":notebook: Poet, Philosopher and all round good guy."},
+"Gerry":{'init':"GC",'bants':":jack_o_lantern:"},
+"Kenny":{'init':"KW",'bants':":space_invader: It's me!"},
+"Gilmour":{'init':"SG",'bants':":wine_glass: 'Mon the Well!"},
+"Dima":{'init':"DM",'bants':":ru: Bastard!"},
+"Williams":{'init':"IW",'bants':":blush: Smartie's in the house!"},
 
 }
 
@@ -73,7 +73,7 @@ class Page1(Page):
 
         if "nameDay" not in pageDict.keys():
             pageDict['nameDay']=random.choice(dayList)
-        st.write("Your submission day this week is:",pageDict['nameDay'])
+        st.write("Your submission day this week is:_",pageDict['nameDay'],"_")
 
         behalfList=[x for x in nameList if x!=pageDict['name']]
         infra.SelectBox(pageDict,'behalf',behalfList,'Select who you are submitting for:')
@@ -81,7 +81,7 @@ class Page1(Page):
         if "behalfDay" not in pageDict.keys():
             pageDict['behalfDay']=random.choice(dayList)
 
-        st.write(pageDict['behalf']+"\'s submission day this week is:",pageDict['behalfDay'])
+        st.write(pageDict['behalf']+"\'s submission day this week is:_",pageDict['behalfDay'],"_")
 
         st.write("### :date: When?")
 
