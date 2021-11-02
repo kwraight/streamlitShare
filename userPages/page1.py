@@ -25,12 +25,12 @@ thePeople={
 "Ritchie":{'init':"RT",'bants':"Ritchie T, he tell _no_ lies."},
 "Roscoe":{'init':"CR",'bants':""},
 "Tony":{'init':"TB",'bants':"Salve Centurion!"},
-"Andy":{'init':"AS",'bants':""},
+"Andy":{'init':"AS",'bants':"Poet-Philosopher and alround good guy."},
 "Gerry":{'init':"GC",'bants':""},
 "Kenny":{'init':"KW",'bants':"It's me!"},
-"Gilmour":{'init':"SG",'bants':""},
+"Gilmour":{'init':"SG",'bants':"'Mon the Well!'"},
 "Dima":{'init':"DM",'bants':"Bastard!"},
-"Williams":{'init':"IW",'bants':""},
+"Williams":{'init':"IW",'bants':"Smartie's in the house!"},
 
 }
 
