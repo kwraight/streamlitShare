@@ -18,9 +18,24 @@ import random
 ### useful functions
 #####################
 
+thePeople={
+"Sandy":{'init':"SW",'bants':"Your name is Alexander Hamilton!"},
+"Hunter":{'init':"IH",'bants':"Staunch!"},
+"McCall":{'init':"IM",'bants':"True Dat."},
+"Ritchie":{'init':"RT",'bants':"Ritchie T, he tell _no_ lies."},
+"Roscoe":{'init':"CR",'bants':""},
+"Tony":{'init':"TB",'bants':"Salve Centurion!"},
+"Andy":{'init':"AS",'bants':""},
+"Gerry":{'init':"GC",'bants':""},
+"Kenny":{'init':"KW",'bants':"It's me!"},
+"Gilmour":{'init':"SG",'bants':""},
+"Dima":{'init':"DM",'bants':"Bastard!"},
+"Williams":{'init':"IW",'bants':""},
+
+}
+
 def GetInitials(name):
-    initMap={"Sandy":"SW","Hunter":"IH","McCall":"IM","Ritchie":"RT","Roscoe":"CR","Tony":"TB","Andy":"AS","Gerry":"GR","Kenny":"KW","Gilmour":"SG","Dima":"DM","Williams":"IW"}
-    return initMap[name]
+    return thePeople[name]['init']
 
 def GetDay(name):
     initMap={"Monday":"MON","Tuesday":"TUE","Wednesday":"WED","Thursday":"THU","Friday":"FRI","Saturday":"SAT","Sunday":"SUN"}
@@ -49,13 +64,12 @@ class Page1(Page):
 
         st.write("### :question: Who?")
 
-        nameList=["Sandy","Hunter","McCall","Ritchie","Roscoe","Tony","Andy","Gerry","Kenny","Gilmour","Dima","Williams"]
+        nameList=list(thePeople.keys())
         dayList=["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
         ### set name
         infra.SelectBox(pageDict,'name',nameList,'Select your name:')
 
-        if pageDict['name']=="Dima":
-            st.write("bastard!")
+        st.write(thePeople[pageDict['name']]['bants'])
 
         if "nameDay" not in pageDict.keys():
             pageDict['nameDay']=random.choice(dayList)
@@ -102,4 +116,4 @@ class Page1(Page):
                 st.write(ss)
             if st.button("Send to Sandy via whatsapp"):
                 st.write("## Of course this doesn't work!")
-                st.write("use the bloody doodle")
+                st.write("use the bloody doodle poll")
