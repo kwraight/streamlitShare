@@ -34,7 +34,7 @@ thePeople={
 
 }
 
-theDays={"Monday":"MON","Tuesday":"TUE","Wednesday":"WED","Thursday":"THU","Friday":"FRI","Saturday":"SAT","Sunday":"SUN"}
+theDays={"Sweetmorn":"SWE", "Boomtime":"BOO", "Pungenday":"PUN", "Prickle-Prickle":"PRI", "Setting Orange":"SET"}
 
 
 def GetInitials(name):
@@ -54,9 +54,9 @@ instructions=["  * choose your name",
 ### main part
 #####################
 
-class Page1(Page):
+class Page2(Page):
     def __init__(self):
-        super().__init__("Submit Date", ":raised_hands: Build you _date_ submission here!", instructions)
+        super().__init__("Submit Scran", ":raised_hands: Build you _scran_ submission here!", instructions)
 
     def main(self):
         super().main()
