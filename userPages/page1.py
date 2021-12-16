@@ -11,6 +11,7 @@ import plotly.express as px
 import altair as alt
 from st_aggrid import AgGrid
 import datetime
+import pyjokes
 
 import random
 
@@ -34,14 +35,16 @@ thePeople={
 
 }
 
-theDays={"Monday":"MON","Tuesday":"TUE","Wednesday":"WED","Thursday":"THU","Friday":"FRI","Saturday":"SAT","Sunday":"SUN"}
-
+crackerDict={
+'colours':["an angry fuckin' red","blue, but not too blue", "green like a bogey",
+        "orange but not staunch", "brown like a jobbie", "grey. what the fuck?! grey?"],
+'toys':["little comb","uncomfortable fake moustache", "ridiculously small deck of cards",
+        "never-to-be-seen-again small screwdriver set", "piece of plastic that someone claims their parents used to have",
+        "jumping frog"]
+}
 
 def GetInitials(name):
     return thePeople[name]['init']
-
-def GetDay(name):
-    return theDays[name]
 
 instructions=["  * choose your name",
         "  * choose name of who you are submitting for",
@@ -56,7 +59,7 @@ instructions=["  * choose your name",
 
 class Page1(Page):
     def __init__(self):
-        super().__init__("Submit Date", ":raised_hands: Build you _date_ submission here!", instructions)
+        super().__init__("Night out", ":raised_hands: Welcome to the Christmas App", instructions)
 
     def main(self):
         super().main()
@@ -64,58 +67,69 @@ class Page1(Page):
         ### getting attribute
         pageDict=st.session_state[self.name]
 
-        st.write("### :question: Who?")
+        st.write("## :christmas_tree: :gift: :calendar: Count down")
+        today = datetime.date.today()
+        xDay = datetime.date(today.year, 12, 25)
+        # st.write("this year:",today.year)
+        # st.write("this xDay:",xDay)
+        diff = xDay - today
+        st.write("### :sleeping: fuck me it's",diff.days,"sleeps to Christmas!")
+
+        st.write("### :bell: Who ir ye?")
 
         nameList=list(thePeople.keys())
-        dayList=list(theDays.keys())
         ### set name
         infra.SelectBox(pageDict,'name',nameList,'Select your name:')
 
         st.write(thePeople[pageDict['name']]['bants'])
 
-        if "nameDay" not in pageDict.keys():
-            pageDict['nameDay']=random.choice(dayList)
-        st.write("Your submission day this week is:_",pageDict['nameDay'],"_")
+        infra.ToggleButton(pageDict,'jumper','Are you wearing a Christmas jumper?')
+        if pageDict['jumper']:
+            st.write("Ya **bold** bastart!")
 
-        behalfList=[x for x in nameList if x!=pageDict['name']]
-        infra.SelectBox(pageDict,'behalf',behalfList,'Select who you are submitting for:')
+        ###
+        st.write("### :beers: Whose round it is?")
+        if st.button("random choice"):
+            st.write("It's *Roscoe's* round")
 
-        if "behalfDay" not in pageDict.keys():
-            pageDict['behalfDay']=random.choice(dayList)
+        ###
+        st.write("### :bell: Christmas controversy")
+        infra.Radio(pageDict,'dieHard',["don't know", "yes", "no"],"Is Die Hard a Christmas movie?")
+        if pageDict['dieHard']=="yes":
+            st.write(":thumbsdown: Is it fuck!")
+        elif pageDict['dieHard']=="no":
+            st.write(":thumbsup: Correctamundo!")
 
-        st.write(pageDict['behalf']+"\'s submission day this week is:_",pageDict['behalfDay'],"_")
+        ###
+        st.write("### :bell: Pull a cracker?")
 
-        st.write("### :date: When?")
+        if st.button("Pull a cracker?"):
+            st.write(":sparkles: **CRACK** :sparkles:")
+            try:
+                pageDict['crackNum']+=1
+            except KeyError:
+                pageDict['crackNum']=1
+            pageDict['cracker']={'colour':random.choice(crackerDict['colours']), 'toy':random.choice(crackerDict['toys']), 'joke': str(pyjokes.get_joke(language='en', category= 'all'))}
 
-        date = st.date_input('Available date:', datetime.date(2021,12,1))
-        time = st.slider("Available times:", value=(datetime.time(12, 00), datetime.time(23, 59)))
-        pref = st.selectbox('Preference level:',dayList)
+        try:
+            if pageDict['crackNum']>1 and pageDict['crackNum']<5:
+                st.write("Cheeky wee multi-tug")
+            elif pageDict['crackNum']>=5 and pageDict['crackNum']<10:
+                st.write("that's a good few pulls right there yiv hid")
+            elif pageDict['crackNum']>=10 and pageDict['crackNum']<20:
+                st.write("jeezo! Calm down there Tuglas Ross")
+            elif pageDict['crackNum']>=20:
+                st.write("well if yer looking for a high score:",pageDict['crackNum'])
+        except KeyError:
+            pass
 
+        if "cracker" in pageDict.keys():
+            st.write("**Last cracker**...")
+            st.write(pageDict['cracker'])
 
-        st.write("### :construction: Build submission...")
+        ###
+        st.write("### :bell: Playlist :notes:")
 
-        if "subStr" not in pageDict.keys():
-            pageDict['subStr']=[]
-        # add submitter info.
-        thisSub=GetInitials(pageDict['name'])+"."+GetDay(pageDict['nameDay'])
-        # add behalf info.
-        thisSub+="["+GetInitials(pageDict['behalf'])+"."+GetDay(pageDict['behalfDay'])+"]"
-        # add availablity
-        thisSub+="."+time[0].strftime("%H.%M")+"-"+time[1].strftime("%H.%M")+"."+GetDay(pref)
-        st.write(thisSub)
-
-        if st.button("add this info."):
-            st.balloons()
-            pageDict['subStr'].append(thisSub)
-
-        st.write("### :point_right: Full submission")
-
-        if len(pageDict['subStr'])<1:
-            st.write("nothing added yet")
-        else:
-            #st.write("Please copy and send to Sandy when you're done")
-            for ss in pageDict['subStr']:
-                st.write(ss)
-            if st.button("Send to Sandy via whatsapp"):
-                st.write("## Of course this doesn't work!")
-                st.write("use the bloody doodle poll")
+        if st.button("Spotify Christmas music list"):
+            st.write("**fuck the fuck off ya lazy fuck**")
+            st.write("Who wipes yer arse fir ye?")
