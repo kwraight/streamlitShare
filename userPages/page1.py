@@ -124,8 +124,10 @@ class Page1(Page):
             pass
 
         if "cracker" in pageDict.keys():
-            st.write("**Last cracker**...")
-            st.write(pageDict['cracker'])
+            st.write("*This cracker*...")
+            st.write("**hat colour**:",pageDict['cracker']['colour'])
+            st.write("**toy**:",pageDict['cracker']['toy'])
+            st.write("**joke**:",pageDict['cracker']['joke'])
 
         ###
         st.write("### :bell: Playlist :notes:")
