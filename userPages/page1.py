@@ -93,12 +93,19 @@ class Page1(Page):
             st.write("It's *Roscoe's* round")
 
         ###
-        st.write("### :bell: Christmas controversy")
+        st.write("### :bell: Christmas controversies")
+
         infra.Radio(pageDict,'dieHard',["don't know", "yes", "no"],"Is Die Hard a Christmas movie?")
         if pageDict['dieHard']=="yes":
             st.write(":thumbsdown: Is it fuck!")
         elif pageDict['dieHard']=="no":
             st.write(":thumbsup: Correctamundo!")
+
+        infra.Radio(pageDict,'sprouts',["don't know", "yep", "nup"],"Sprouts?")
+        if pageDict['sprouts']=="yep":
+            st.write(":scream_cat: Whatever man, you can have mine")
+        elif pageDict['sprouts']=="nup":
+            st.write(":smile_cat: You know thems the boke")
 
         ###
         st.write("### :bell: Pull a cracker?")
