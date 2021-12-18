@@ -75,7 +75,9 @@ class Page1(Page):
         diff = xDay - today
         st.write("### :sleeping: fuck me it's",diff.days,"sleeps to Christmas!")
 
-        st.write("### :bell: Who ir ye?")
+        if "fixes" not in pageDict.keys():
+            pageDict['fixes']=""
+        st.write("### :bell: "+pageDict['fixes']+" Who ir ye? "+pageDict['fixes'])
 
         nameList=list(thePeople.keys())
         ### set name
@@ -85,15 +87,18 @@ class Page1(Page):
 
         infra.ToggleButton(pageDict,'jumper','Are you wearing a Christmas jumper?')
         if pageDict['jumper']:
-            st.write("Ya **bold** bastart!")
+            st.write("The **magic** happens!")
+            pageDict['fixes']=":sparkles:"
+        else:
+            pageDict['fixes']=""
 
         ###
-        st.write("### :beers: Whose round it is?")
+        st.write("### :beers: "+pageDict['fixes']+" Whose round it is? "+pageDict['fixes'])
         if st.button("random choice"):
             st.write("It's *Roscoe's* round")
 
         ###
-        st.write("### :bell: Christmas controversies")
+        st.write("### :bell: "+pageDict['fixes']+" Christmas controversies "+pageDict['fixes'])
 
         infra.Radio(pageDict,'dieHard',["don't know", "yes", "no"],"Is Die Hard a Christmas movie?")
         if pageDict['dieHard']=="yes":
@@ -108,7 +113,8 @@ class Page1(Page):
             st.write(":smile_cat: You know thems the boke")
 
         ###
-        st.write("### :bell: Pull a cracker?")
+        st.write("### :bell: "+pageDict['fixes']+" Pull a cracker? "+pageDict['fixes'])
+
 
         if st.button("Pull a cracker?"):
             st.write(":sparkles: **CRACK** :sparkles:")
@@ -137,7 +143,7 @@ class Page1(Page):
             st.write("**joke**:",pageDict['cracker']['joke'])
 
         ###
-        st.write("### :bell: Playlist :notes:")
+        st.write("### :bell: "+pageDict['fixes']+" Playlist :notes: "+pageDict['fixes'])
 
         if st.button("Spotify Christmas music list"):
             st.write("**fuck the fuck off ya lazy fuck**")
