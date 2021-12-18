@@ -37,10 +37,13 @@ thePeople={
 
 crackerDict={
 'colours':["an angry fuckin' red","blue, but not too blue", "green like a bogey",
-        "orange but not staunch", "brown like a jobbie", "grey. what the fuck?! grey?"],
+        "orange but not staunch", "brown like a jobbie", "grey. what the fuck?! grey?",
+        "pink, or mabye a manly salmon", "GOLD! Always believe in your soul...",
+        "purrurple and whit?!", "90s tie-dye which makes you look like a bit of a prick to be honest"],
 'toys':["little comb","uncomfortable fake moustache", "ridiculously small deck of cards",
         "never-to-be-seen-again small screwdriver set", "piece of plastic that someone claims their parents used to have",
-        "jumping frog","A wee stupit fish made out of coloured shiteing plastic that’s as thin as piss and rolls about in yer hand like an arsehole pretending to tell the cunting future"]
+        "jumping frog","A wee stupit fish made out of coloured shiteing plastic that’s as thin as piss and rolls about in yer hand like an arsehole pretending to tell the cunting future",
+        "fuck all use to embdy sewing kit"]
 }
 
 def GetInitials(name):
