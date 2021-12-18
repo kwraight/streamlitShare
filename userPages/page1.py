@@ -27,7 +27,7 @@ thePeople={
 "Roscoe":{'init':"CR",'bants':":football:"},
 "Tony":{'init':"TB",'bants':":hand: Salve Centurion!"},
 "Andy":{'init':"AS",'bants':":notebook: Poet, Philosopher and all round good guy."},
-"Gerry":{'init':"GC",'bants':":jack_o_lantern:"},
+"Gerry":{'init':"GC",'bants':":airplane: International playboy"},
 "Kenny":{'init':"KW",'bants':":space_invader: It's me!"},
 "Gilmour":{'init':"SG",'bants':":wine_glass: 'Mon the Well!"},
 "Dima":{'init':"DM",'bants':":ru: Bastard!"},
