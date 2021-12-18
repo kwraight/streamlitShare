@@ -40,7 +40,7 @@ crackerDict={
         "orange but not staunch", "brown like a jobbie", "grey. what the fuck?! grey?"],
 'toys':["little comb","uncomfortable fake moustache", "ridiculously small deck of cards",
         "never-to-be-seen-again small screwdriver set", "piece of plastic that someone claims their parents used to have",
-        "jumping frog"]
+        "jumping frog","A wee stupit fish made out of coloured shiteing plastic that’s as thin as piss and rolls about in yer hand like an arsehole pretending to tell the cunting future"]
 }
 
 def GetInitials(name):
@@ -95,7 +95,7 @@ class Page1(Page):
         ###
         st.write("### :beers: "+pageDict['fixes']+" Whose round it is? "+pageDict['fixes'])
         if st.button("random choice"):
-            st.write("It's *Roscoe's* round")
+            st.write("It's *Roscoe's* round *(haha, guid luck getting that wan!)*")
 
         ###
         st.write("### :bell: "+pageDict['fixes']+" Christmas controversies "+pageDict['fixes'])
