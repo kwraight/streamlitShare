@@ -8,6 +8,8 @@ FROM kwraight/multitemplate-app:cern
 USER root
 RUN rm -rf ./userPages/theme*
 COPY music/* ./userPages/music/
+COPY physicsGarden/* ./userPages/physicsGarden/
+#COPY STS/* ./userPages/STS/
 COPY mainApp.py ./mainApp.py
 COPY requirements.txt ./requirements.txt
 RUN pip3 install -r requirements.txt

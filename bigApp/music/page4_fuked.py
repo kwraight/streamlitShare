@@ -5,22 +5,26 @@ from core.Page import Page
 import core.stInfrastructure as infra
 ### Standard
 import os
+### local
+from .CommonCode import GetTuneListThing
+from .CommonCode import FilterFiles
 
 #####################
 ### main part
 #####################
 
-class Page1(Page):
+class Page2(Page):
     def __init__(self):
-        super().__init__("Music", "Zeroth Page", ['nothing to report'])
+        super().__init__("Fuked", "Fukes of Hazzard...", ['nothing to report'])
 
     def main(self):
         super().main()
 
-        ### getting attribute
         pageDict=st.session_state[self.name]
 
+        dictKey="Fuked"
         ### pass code?
+        st.write("### ",GetTuneListThing(dictKey,'description'))
 
         ### set tune directory
         #st.write(os.getcwd())
@@ -31,14 +35,15 @@ class Page1(Page):
         if pageDict['tuneDir'][-1]!="/":
             pageDict['tuneDir']+="/"
 
-        st.write("checking:",pageDict['tuneDir'])
-        try:
-            for file in os.listdir(pageDict['tuneDir']):
-                #st.write(os.path.join(pageDict['tuneDir'], file))
-                if file.endswith(".mp3"):
-                    name=os.path.join(pageDict['tuneDir'], file)
-                    st.write(name)
-                    st.audio(name)
-        except FileNotFoundError:
-            st.write("no such thing")
-            st.stop()
+        tuneList=GetTuneListThing(dictKey,'tunes')
+
+        if st.session_state.debug:
+            st.write("checking:",pageDict['tuneDir'])
+            st.write("looking for",tuneList)
+
+        fileList=FilterFiles(pageDict['tuneDir'],tuneList)
+
+        count=1
+        for e,f in enumerate(fileList,1):
+            st.write("### "+str(e)+".",f['short'])
+            st.audio(f['name'])
