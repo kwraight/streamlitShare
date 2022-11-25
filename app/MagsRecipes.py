@@ -59,7 +59,7 @@ def GetConv(inVal,inUnit,outUnit):
 
 def main():
     ### get state variable
-    state = infra.get()
+    state = st.session_state
 
     ### define pages dictionary
     pages = {

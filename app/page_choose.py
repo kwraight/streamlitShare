@@ -41,18 +41,24 @@ def GetConvVolume(inVal,inUnit,outUnit):
 
 
 def GetScaleConv(inVal,inUnit,outUnit):
+    # st.write(inVal,inUnit,outUnit)
     if inUnit.lower()==outUnit.lower():
         return inVal, inUnit
+    if inUnit==None or inVal==None:
+        return inVal, inUnit
     val=None
-    if inUnit=="kg": val=Weight(kg=inVal)
-    elif inUnit=="lb": val=Weight(lb=inVal)
-    elif inUnit=="g": val=Weight(g=inVal)
-    elif inUnit=="oz": val=Weight(oz=inVal)
-    elif inUnit=="pint": val=Volume(imperial_pint=inVal)
-    elif inUnit=="floz": val=Volume(imperial_oz=inVal)
-    elif inUnit=="l": val=Volume(l=inVal)
-    elif inUnit=="ml": val=Volume(l=inVal*0.001)
+    # try:
+    if inUnit=="kg": val=Weight(kg=float(inVal))
+    elif inUnit=="lb": val=Weight(lb=float(inVal))
+    elif inUnit=="g": val=Weight(g=float(inVal))
+    elif inUnit=="oz": val=Weight(oz=float(inVal))
+    elif inUnit=="pint": val=Volume(imperial_pint=float(inVal))
+    elif inUnit=="floz": val=Volume(imperial_oz=float(inVal))
+    elif inUnit=="l": val=Volume(l=float(inVal))
+    elif inUnit=="ml": val=Volume(l=float(inVal)*0.001)
     else: return inVal, inUnit
+    # except TypeError:
+    #     pass
     try:
         if inUnit in ["kg","lb","g","oz"]:
             if outUnit=="metric": return val.g, "g"
@@ -139,7 +145,8 @@ def main_part(state):
     ## get list of recipes and display
     st.write("## List of available recipes")
     recipeFiles=[]
-    myDir="MagsRecipes/recipes/"+sel_name
+    cwd = os.getcwd()
+    myDir=cwd+"/recipes/"+sel_name
     for file in os.listdir(myDir):
         if file.endswith(".rpy") or file.endswith(".xpy"):
             recipeFiles.append(file)
@@ -153,17 +160,21 @@ def main_part(state):
     df_list=df_list.sort_values("name")
     if sel_filt!="Any type":
         df_list=df_list.query("type=='"+sel_filt+"'")
-    infra.DisplayWithOption(df_list[['name','type']],"1")
+    infra.DisplayWithOption(df_list[['name','type']], "1")
+
 
     ## select from list
     st.write("## Select recipe")
-    sel_rec=st.selectbox("Choose a recipe", list(df_list.values), format_func=lambda x: x[0])
+    sel_rec=st.selectbox("Choose a recipe", df_list['name'].to_list())
+
+    sel_rec_file=df_list.query('name=="'+sel_rec+'"')['file'].values[0]
+    # st.write(f"({sel_rec_file})")
 
     # ## display recipe: ingredients section and method section
-    repDict= GetRepiceDict(myDir+"/"+sel_rec[1])
+    repDict= GetRepiceDict(myDir+"/"+sel_rec_file)
     if state.debug: st.write(repDict)
     st.write("## Recipe details")
-    st.write("### Recipe for **",repDict['title'],"** by *",repDict['author'],"*")
+    st.write("### Recipe for _"+repDict['title']+"_ by _"+repDict['author']+"_")
     try:
         st.write("serves:",repDict['serves'])
     except KeyError:
@@ -187,6 +198,7 @@ def main_part(state):
         st.write("original input:")
         st.dataframe(df_ing)
 
+    # st.dataframe(df_ing)
     # scaling
     df_ing['scale']=df_ing['unit'].apply(lambda x: ScaleMap(x)  )
     df_ing['amount']=df_ing['amount'].astype(float, errors="ignore")
@@ -201,7 +213,8 @@ def main_part(state):
         if state.debug: st.write("no conversion necessary")
 
     # display scaled values
-    infra.DisplayWithOption(df_ing[["name","scaleAmount","scaleUnit"]],"2")
+    df_ing=df_ing.round(3)
+    infra.DisplayWithOption(df_ing[["name","scaleAmount","scaleUnit"]], "2")
     st.write("### method")
     for c,m in enumerate(repDict['method'],1):
         st.write(str(c)+". "+m)
