@@ -6,18 +6,6 @@ Check requirements file for necessary libraries
 
 ---
 
-## Running
-
-*Stand Alone* version:
-
-Get libraries:
-> python3 -m pip install -r requirements
-
-Run WebApp:
-> streamlit run MagsRecipes.py
-
----
-
 ## WebApp Layout
 
 **Basic Idea:**
@@ -37,6 +25,4 @@ Run WebApp:
 **(Broom cupboard)**
   * State settings
 
-## TODO
-  * content: add Recipes
-  * make page for adding recipe
+---
