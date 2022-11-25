@@ -1,15 +1,16 @@
-# streamlitShare
-stuff for sharing on streamlit
+# MagsRecipes
+A digital of Mags's red cookbook. With some additions from Kenny and Agnes.
 
-## sandyQuiz
-Simple multiple choice quiz format. Intended to test sharing.
+## Structure
 
-## weatherApp
-Display 48h and 7 day (Coatbridge) forecast plots. Forecast using `pyowm` wrapper for OpenWeatherMap. Includes plotting options: matplotlib, plotly, altair.
+### app
 
-## whatsapp
-Show statistics of WhatsApp chats. Requires chat file provided by the user
+Code for app.
 
-## stravaApp
-Show statistics of strave check-ins.
-**Problem** Cannot open browser page to confirm authorisation after entering account details.
+### recipes
+
+Recipes:
+- Mags
+- Agnes
+- Kenny
+
