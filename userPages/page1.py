@@ -93,8 +93,8 @@ class Page1(Page):
         df_new.loc[df_new[colName['legTitle']]==" ",colName['legTitle']]="N/A"
 
 
-        df_new['Begin'] = df_new['Begin'].astype('datetime64')
-        df_new['End'] = df_new['End'].astype('datetime64')
+        df_new['Begin'] = df_new['Begin'].astype('datetime64', errors='ignore')
+        df_new['End'] = df_new['End'].astype('datetime64', errors='ignore')
 
         AgGrid(df_new)
         #st.dataframe(df_new)
