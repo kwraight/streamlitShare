@@ -78,7 +78,7 @@ class Pagex(Page):
             for mk in [x for x in st.session_state.keys()]:
                 if mk=="debug": continue
                 try:
-                    state.__delattr__(mk)
+                    st.session_state.__delattr__(mk)
                 except AttributeError:
                     pass
 
