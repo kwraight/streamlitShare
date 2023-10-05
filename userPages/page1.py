@@ -158,22 +158,22 @@ class Page1(Page):
 
             ,yaxis = dict(
                 title= colName['yTitle']
-                ,autorange="reversed"
+                # ,autorange="reversed"
                 ,automargin=True
-        #         ,anchor="free"
+                # ,anchor="free"
                 ,ticklen=10
                 ,showgrid=True
                 ,showticklabels=True
                 ,tickfont=dict(
-                    family='Old Standard TT, serif', size=16, color='gray'))
+                    family='Old Standard TT, serif', size=12, color='gray'))
 
             ,legend=dict(
                 orientation="h"
                 ,yanchor="bottom"
-                ,y=1.1
+                ,y=-1
                 ,title= colName['legTitle']
                 ,xanchor="right"
-                ,x=1
+                ,x=1.5
                 ,font=dict(
                     family="Arial"
                     ,size=14
@@ -192,7 +192,9 @@ class Page1(Page):
                 family="Arial",
                 size=24,
                 color="darkgray"
-            )
+            ),
+            width=int(1000),
+            height=int(2000)
         )
         # fig.show()
         st.plotly_chart(fig)
